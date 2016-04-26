@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js练习</title>
+</head>
+<style>
+*{
+    margin:0;
+    padding: 0;
+}
+body {
+	background-color: #dcc;
+}
+</style>
+
+<body>
+
+<script>
+for(var i=1; i<10; i++) {
+	for(var j=1; j<=i; j++) {
+		document.write(j+'*'+i+' ')
+	}
+	document.write('<br />')
+}
+</script>
+<hr />
+<script>
+for(var i=1; i<10; i++ ) {
+	for(var j=1; j<=i ;j++) {
+		document.write(j + '+' + i +' ')
+	}
+	document.write('<br />')
+}
+</script>
+<hr />
+<script>
+for(var i=1; i<10; i++ ) {
+	for(var j=1; j<=i ;j++) {
+		document.write(i - j + 1 + ' ')
+	}
+	document.write('<br />')
+}
+</script>
+<hr />
+<script>
+for(var i=0; i<=10; i++) {
+	if(i%2==0) {
+		document.write("<font color=red>"+i+"</font>\t")
+	} else {
+		document.write(i+' ');
+	}
+}	
+</script>
+<hr />
+<script>
+for(var i=1; i<10; i++ ) {
+	for(var j=1; j<=i ;j++) {
+		if(i*j%2==0) {
+			document.write("<font color=red>"+j+"*"+i+"</font>\t")
+
+		} else {
+            document.write(j + '*' + i +' ')
+		}
+
+	}
+	document.write('<br />')
+}
+</script>
+</body>
+
+</html>
