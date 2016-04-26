@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js练习</title>
+</head>
+<style>
+*{
+    margin:0;
+    padding: 0;
+}
+
+#tab{
+	width: 600px;
+	height: 300px;
+	background-color: #ccc;
+}
+#tab input {
+	display: block;
+	float: left;
+	width: 200px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+#tab div {
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	display: none;
+	font-size: 30px;
+	color: #fff;
+	text-align: center;
+}
+#tab .on{
+    background: red;
+    color: #fff;
+}
+#tab .grey{
+    background: #ccc;
+}
+
+
+</style>
+
+<body>
+<div id="tab">
+    <input type="button" value="按钮1" class="on" index='0' />
+    <input type="button" value="按钮2" index='1' />
+    <input type="button" value="按钮3" index='2' />	
+    <div style="display: block;">内容1</div>
+    <div>内容2</div>
+    <div>内容3</div>
+</div>
+
+<script> 
+var aInput=document.getElementsByTagName('input');
+var oTab=document.getElementById('tab');
+var aDiv=oTab.getElementsByTagName('div');
+for(var i=0; i<aInput.length;i++) {
+	aInput[i].index=i;
+	aInput[i].onclick=function(){
+	for(var j=0;j<aInput.length;j++) {
+    	aInput[j].className=null;
+    	aDiv[j].style.display='none';
+    }
+    this.className='on';
+    aDiv[this.index].style.display='block';
+	}
+
+}
+</script>
+</body>
+
+</html>
