@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跳动的心</title>
+    <style>
+        .box{ width: 180px; height: 160px;margin: 200px auto; background:#ccc;position: relative;
+                animation: shan .6s infinite alternate; text-align: center;
+                -webkit-animation: shan .6s infinite alternate;
+        }
+        @-webkit-keyframes shan{
+            0%{
+                opacity: 0.5;
+                -webkit-transform:scale(0.8,0.8);
+                         transform:scale(0.8,0.8);
+            }
+            100%{
+                opactiy:1;
+            }
+        }
+        .box span{ display: inline-block; background: #f06a73; position: absolute;}
+        .box_lt,.box_rt{ width: 100px; height: 100px; border-radius: 50%;}
+        .box_lt{left: 0; top: 0;}
+        .box_rt{left: 80px; top: 0;}
+        .box_ft{ width: 100px; height: 100px; -webkit-transform: rotate(135deg);left: 40px; top: 40px;}
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span class="box_lt"></span>
+        <span class="box_rt"></span>
+        <span class="box_ft"></span>
+    </div>
+</body>
+</html>
