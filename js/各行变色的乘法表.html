@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>123</title>
+<style>
+*{margin:0;padding:0;}
+ul{list-style: none;}
+#box{width:600px; height: 370px; background-color: #ccc; }
+li{width:100%;height:40px;line-height: 40px; display: block;border-bottom: 1px solid #000;}
+.bg1{background-color: #ddc;}
+.bg2{background-color: #dcc;}
+</style>
+
+</head>
+<body>
+
+<ul id="box">
+
+</ul>
+
+<script>
+
+var oUl = document.getElementById("box");
+var str = "";
+
+for(var c=1;c<=9;c++) {
+    if(c%2==0) {
+        str += "<li class='bg1'>";
+    }else {
+        str += "<li class='bg2'>";
+    }
+  
+    for(var r=1;r<=c;r++) {
+        str += r+"*"+c+"     ";
+        
+    }
+     str += "</li>";
+    oUl.innerHTML = str; 
+}
+
+</script>
+
+</body>
+</html> 
