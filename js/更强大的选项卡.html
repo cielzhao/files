@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>更强大的选项卡</title>
+</head>
+<style>
+*{
+    margin:0;
+    padding: 0;
+    list-style: none;
+}
+li {
+	width: 450px;
+	height: 200px;
+	background-color: #dcc;
+	overflow: hidden;
+	margin: 10px;
+	float: left;
+}
+li input {
+	width: 150px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	display: block;
+	float: left;
+}
+li input.on {
+    background-color: #b4b;
+}
+li div {
+	width: 100%;
+	height: 100%;
+	background-color: #3cc;
+	clear: both;
+	display: none;
+}
+li div.show {
+	display: block;
+}
+li.second {
+	width: 600px;	
+}
+li.third {
+	width: 750px;	
+}
+</style>
+
+
+<body>
+<ul>
+	<li>
+		<input type="button" value="按钮1" class="on" />
+		<input type="button" value="按钮2" />
+		<input type="button" value="按钮3" />
+		<div class="show">内容1</div>
+		<div>内容2</div>
+		<div>内容3</div>
+	</li>
+	<li class="second">
+		<input type="button" value="按钮1" class="on" />
+		<input type="button" value="按钮2" />
+		<input type="button" value="按钮3" />
+		<input type="button" value="按钮4" />
+		<div class="show">内容1</div>
+		<div>内容2</div>
+		<div>内容3</div>
+		<div>内容4</div>
+	</li>
+	<li class="third">
+		<input type="button" value="按钮1" class="on" />
+		<input type="button" value="按钮2" />
+		<input type="button" value="按钮3" />
+		<input type="button" value="按钮4" />
+		<input type="button" value="按钮5" />
+		<div class="show">内容1</div>
+		<div>内容2</div>
+		<div>内容3</div>
+		<div>内容4</div>
+		<div>内容5</div>
+	</li>
+</ul>
+
+<script> 
+var aLi=document.getElementsByTagName('li');
+for(var i=0;i<aLi.length;i++) {
+	tab(aLi[i]);
+}
+// tab(aLi[0],1);
+// tab(aLi[1],2);
+// tab(aLi[2],3);
+
+function tab(oLi,startIndex) {
+	var light=startIndex||0;
+	var aInput=oLi.getElementsByTagName('input');
+	var aDiv=oLi.getElementsByTagName('div');
+	tabInner(light);
+
+	function tabInner(innerIndex) {
+		for(var i=0;i<aInput.length;i++) {
+			aInput[i].className='';
+			aDiv[i].className='';
+		}
+		aInput[innerIndex].className='on';
+		aDiv[innerIndex].className='show';
+	}
+	
+		for(var i=0;i<aInput.length;i++) {
+		(function(index) {
+			aInput[i].onclick=function() {
+				tabInner(index);
+			}
+			
+		})(i)
+	}
+}
+
+</script>
+</body>
+
+</html>
