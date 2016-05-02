@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>qq界面效果</title>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.main {
+    margin: 50px auto;
+    width: 282px;
+    height: 560px;
+    border: 1px solid #d9d9da;
+    box-shadow: 0px 0px 12px #c8c8c8; 
+}
+.header {
+    height: 140px;
+    border-bottom: 1px solid #d9d9da;
+    background: url("http://img.ivsky.com/img/tupian/pre/201602/13/yunhai-009.jpg") no-repeat;
+    background-size: 100%;
+}
+.nav {
+    height: 35px;
+    border-bottom: 1px solid #d9d9da;
+    }
+.nav li {
+    width: 46px;
+    float: left;
+}
+.nav>li>a {
+    padding: 5px 15px 3px 15px;
+}
+.nav>li>a:hover {
+    background-color: #fff;
+}
+.nav li span {
+    font-size: 20px;
+    color: #ddd;
+    text-align: center;
+}
+.nav li span:hover {
+    color: #428bca;
+}
+.list {
+    overflow-y:scroll;
+    height: 300px;
+}
+#list ul{
+    display: none;
+}
+.list .out li {
+    margin-left: 10px;
+
+    font-family: "Microsoft Yahei";
+    
+}
+.list .out li h2 {
+    margin: 0;
+    font-size: 13px;
+    line-height: 30px;
+}
+.list .out li span.glyphicon-play {
+    font-size: 8px;
+}
+.list .out li span.number {
+    font-size: 12px;
+}
+.lis ul li {
+    line-height: 60px;
+}
+/*.lis ul li:hover {
+    background-color: #FFEC8B;
+    margin: 0;
+}*/
+#list ul li.on{
+            background: #FFEC8B;
+            color: #fff;
+        }
+
+.app {
+    height: 83px;
+    background-color: #e6e6e7;
+    border-top: 1px solid #808489;
+}
+</style>
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        
+    </div>
+
+    <ul class="nav">
+        <li><a href="#"><span class="glyphicon glyphicon-comment"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-floppy-saved"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-bookmark"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-phone"></span></a></li>        
+    </ul>
+
+    <div class="list">
+        <ul class="out" id="list">
+
+            <li class="lis"> 
+                <h2>
+                    <span class="glyphicon glyphicon-play"></span>
+                    我的设备
+                    <span class="number">1/2</span>
+                </h2> 
+                <ul>
+                    <li>我的Android手机<br />上次登录:2016-5-2</li>
+                    <li>发现新设备</li>
+                </ul>
+            </li>
+
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play"></span> 
+                    我的好友 
+                    <span class="number">4/6</span>
+                </h2>
+                <ul>
+                    <li>sunshine</li>
+                    <li>可爱</li>
+                    <li>梦里花落知多少</li>
+                </ul>
+            </li>
+
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play"></span> 
+                    朋友 
+                    <span class="number">2/2</span>
+                </h2>           
+                <ul>
+                    <li>小A</li>
+                    <li>小B</li>
+                </ul>
+            </li>
+
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play"></span> 
+                    家人 
+                    <span class="number">0/0</span>
+                </h2>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play"></span> 
+                    同学 
+                    <span class="number">0/0</span>
+                </h2>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play"></span> 
+                    公众号 
+                    <span class="number">0/0</span>
+                </h2>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play"></span> 
+                    黑名单 
+                    <span class="number">0/0</span>
+                </h2>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+
+    <footer class="app">
+        
+    </footer>
+</div>
+<script>
+    //最外层的ul；
+    var oUl=document.getElementById('list');
+    //第二层的ul;
+    var aH2=oUl.getElementsByTagName('h2');
+    var aUl=oUl.getElementsByTagName('ul');
+    var aLi=[];
+    for(var i=0; i<aUl.length; i++){
+        //得到最底层li的类数组集合；
+        var cur=aUl[i].getElementsByTagName('li');
+        for(var j=0; j<cur.length; j++){
+            aLi.push(cur[j]);//cur[j]:就是要拿到的每个li;
+        }
+    }
+    //选项卡中的按钮思想：先让所有都隐藏，再让当前这个显示；
+    for(var i=0; i<aLi.length; i++){
+        aLi[i].onclick=function(){
+            for(var i=0; i<aLi.length; i++){
+                aLi[i].className='';
+            }
+            this.className='on';
+        }
+    }
+    for(var i=0; i<aH2.length; i++){
+        aH2[i].index=i;
+        aH2[i].bOk=true;
+        //1.点击每个按钮时，让他对应的ul显示；属性值为number
+        //2.自定义属性运用：每个元素上都加一个开关 属性值为boolean
+        aH2[i].onclick=function(){
+            if(this.bOk){
+                aUl[this.index].style.display='block';
+            }else{
+                aUl[this.index].style.display='none';
+            }
+            this.bOk=!this.bOk;
+        }
+    }
+</script>
+</body>
+</html>
