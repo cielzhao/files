@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>仿qq界面效果</title>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.main {
+    margin: 50px auto;
+    width: 282px;
+    height: 560px;
+    border: 1px solid #d9d9da;
+    box-shadow: 0px 0px 12px #c8c8c8; 
+}
+.header {
+    height: 150px;
+    border-bottom: 1px solid #d9d9da;
+    background: url("http://img.ivsky.com/img/tupian/pre/201602/13/yunhai-009.jpg") no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+.header .top .left{
+    float: left;
+}
+.header .top .right{
+    position: absolute;
+    right: 0;
+}
+.header .top .left li{
+    float: left;
+    color: #fff;
+    padding: 5px 3px;
+}
+.header .top .right li{
+    float: left;
+    color: #fff;
+    padding: 5px;
+}
+
+
+
+
+.input-group {
+    display: block;
+    top: 80px;
+}
+
+
+/* nav */
+.nav {
+    height: 35px;
+    border-bottom: 1px solid #d9d9da;
+    }
+.nav li {
+    width: 46px;
+    float: left;
+}
+.nav>li>a {
+    padding: 5px 15px 3px 15px;
+}
+.nav>li>a:hover {
+    background-color: #fff;
+}
+.nav li span {
+    font-size: 20px;
+    color: #ddd;
+    text-align: center;
+}
+.nav li span:hover {
+    color: #428bca;
+}
+.lists {
+    overflow-y:scroll;
+    height: 300px;
+}
+.lists .list ul{
+    display: none;
+    font-size: 13px;
+}
+
+.lists .list li h2 {
+    margin: 0;
+    font-size: 13px;
+    line-height: 30px;
+    padding-left: 10px;
+}
+.lists .list li span.glyphicon-play {
+    font-size: 8px;
+}
+.lists .list li span.number {
+    font-size: 12px;
+}
+.lists .list .list_in{
+    padding-left: 40px;
+    padding-bottom: 10px;
+}
+.lists .list .list_in:hover{
+    background-color: #fcf0c1;
+}
+
+.lists .list .number{
+    font-size: 10px;
+}
+
+.lists .list .small{
+    font-size: 12px;
+    line-height: 15px;
+    display: block;
+    margin-top: -6px;
+    white-space: nowrap;
+}
+
+
+/* footer */
+.app {
+    height: 83px;
+    background-color: #cbe9f7;
+    border-top: 1px solid #8bcded;
+}
+</style>
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        <div class="top">
+            <ul class="left">
+                <li><img src="#"></li>
+                <li>QQ</li>
+            </ul>
+            <ul class="right">
+                <li><span class="glyphicon glyphicon-cog"></span></li>
+                <li><span class="glyphicon glyphicon-minus-sign"></span></li>
+                <li><span class="glyphicon glyphicon-remove"></span></li>
+            </ul>
+        </div>
+        
+
+        <div class="input-group">
+            <input type="text" class="form-control input-md">
+        </div>       
+    </div>
+
+
+
+    <nav class="nav">
+        <li><a href="#"><span class="glyphicon glyphicon-comment"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-floppy-saved"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-bookmark"></span></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-phone"></span></a></li>        
+    </nav>
+
+
+    <section class="lists">
+        <ul class="list">
+
+            <li class="lis"> 
+                <h2>
+                    <span class="glyphicon glyphicon-play" id="glyphicon"></span>
+                    我的设备<span class="number">&nbsp;1/2</span>
+                </h2> 
+                <ul>
+                    <li class="list_in"><h2>我的Android手机<br /><span class="small">上次登录:<span class="number">2016-5-2</span></span></h2></li>
+                    <li class="list_in"><h2>发现新设备<br /><span class="small">玩转智能新设备，发现新生活</span></h2></li>
+                </ul>
+            </li>
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play" id="glyphicon"></span> 
+                    我的好友<span class="number">&nbsp;2/3</span>
+                </h2>
+                <ul>
+                    <li class="list_in"><h2>sunshine<br /><span class="small">冷暖自知。</span></h2></li>
+                    <li class="list_in"><h2>梦里花落<br /><span class="small">如果有来生，要做一棵树。</span></h2></li>
+                    <li class="list_in"><h2>静茹♂ 鱼<br /><span class="small">[离线请留言]&nbsp;&nbsp;我要你相信温暖，美好，信任，尊严，坚强这些老掉牙的字眼。我不要你颓废，空虚，迷茫，糟践自己，伤害别人。</span></h2></li>
+                </ul>
+            </li>
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play" id="glyphicon"></span> 
+                    朋友<span class="number">&nbsp;2/2</span>
+                </h2>           
+                <ul>
+                    <li class="list_in"><h2>幸福、纯纯的<br /><span class="small">生活不会因你放弃理想而简单一点点，所以我选择用力向前走。</span></h2></li>
+                    <li class="list_in"><h2>烟花再灿烂也只是过眼云烟<br /><span class="small">因为莪不聪明，所以莪学不会装傻。</span></h2></li>
+                </ul>
+            </li>
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play" id="glyphicon"></span> 
+                    家人<span class="number">&nbsp;0/0</span>
+                </h2>
+            </li>
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play" id="glyphicon"></span> 
+                    同学<span class="number">&nbsp;0/0</span>
+                </h2>
+            </li>
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play" id="glyphicon"></span> 
+                    公众号<span class="number">&nbsp;0/0</span>
+                </h2>
+            </li>
+            <li class="lis">
+                <h2>
+                    <span class="glyphicon glyphicon-play" id="glyphicon"></span> 
+                    黑名单<span class="number">0/0</span>
+                </h2>
+            </li>
+
+        </ul>
+        
+    </section>
+
+    <footer class="app">
+        
+    </footer>
+</div>
+<script>
+$(document).ready(function(){
+
+    $(".lis>h2").click(function(){
+        var ulNode=$(this).next("ul");
+        ulNode.toggle();
+
+    });
+});
+</script>
+</body>
+</html>
