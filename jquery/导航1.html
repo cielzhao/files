@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+ul{
+	width: 1000px;
+	height: 35px;
+	margin: 100px auto;
+	background:#222;
+}
+ul li{
+	float: left;
+}
+ul li a{
+    padding: 0 30px;
+    line-height: 35px;
+	display: block;
+	color: #fff;
+}
+ul li a:hover, .active{
+	background-color: #333;
+    color: #fff;
+}
+</style>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#nav li").each(function(index){
+		$(this).click(function(){
+			$("li.active").removeClass("active")
+			$("li").eq(index).addClass("active");		
+		})
+
+	})
+})
+</script>
+</head>
+<body>
+<nav>
+	<ul id="nav">
+		<li class="active"><a href="#">首页</a></li>
+		<li><a href="#">职业课程</a></li>
+		<li><a href="#">就业学习</a></li>
+		<li><a href="#">技术社区</a></li>
+		<li><a href="#">联系我们</a></li>
+	</ul>
+</nav>
+
+
+</body>
+</html>
