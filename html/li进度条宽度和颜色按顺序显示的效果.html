@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style media="screen">
+	li{
+	    padding-left: 20px;
+	    list-style: none;
+	}
+	li>div{
+	    height: 20px;
+	    background-color: #038faa;
+	    border-top-right-radius: 10px;
+	    border-bottom-right-radius: 10px;
+	    display: inline-block;
+	    position: relative;
+	}
+	li>div>span{
+	    display: inline-block;
+	    position: absolute;
+	    right: -22px;
+
+	}
+
+	</style>
+</head>
+<body>
+	<ul>
+		<li>
+			<div><span>56</span></div>
+		</li>
+		<li>
+			<div><span>18</span></div>
+		</li>
+		<li>
+			<div><span>16</span></div>
+		</li>
+		<li>
+			<div><span>13</span></div>
+		</li>
+		<li>
+			<div><span>11</span></div>
+		</li>
+		<li>
+			<div><span>9</span></div>
+		</li>
+		<li>
+			<div><span>9</span></div>
+		</li>
+		<li>
+			<div><span>8</span></div>
+		</li>
+		<li>
+			<div><span>7</span></div>
+		</li>
+		<li>
+			<div><span>7</span></div>
+		</li>
+	</ul>
+
+	<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript">
+	
+		$(function(){
+			var hotMaxNum = $("div:first").find("span").html();
+			$("div").each(function(){
+				var hotNum = $(this).find("span").html();
+				$(this).width(hotNum/hotMaxNum*350);
+			});
+		});
+
+
+		$(function(){
+			var colorValue = new Array("#ffbbff", "#ffd39b", "#c6e2ff", "#9f79ee", "#9bcd9b","#ff8c00","#87ceff","#3addfc","#cd69c9","#00eeee");
+			var tempValue = $("span").eq(0).html();
+			var y = 0;
+			$("span").each(function(){
+				var hotNumMax = $(this).html();
+				if(hotNumMax*1<tempValue){
+					tempValue = hotNumMax*1;
+					y++;
+				}
+				$(this).parent().css( {"background-color":colorValue[y],"color":colorValue[y]} );
+			});			
+		});
+
+	</script>
+
+</body>
+</html>
