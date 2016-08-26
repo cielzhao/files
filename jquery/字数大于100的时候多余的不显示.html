@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>测试</title>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $("ul").each(function(){
+                    var sum = 0;
+                    var liNum =	$(this).find("li").length;
+                    for(i=0;i<liNum;i++){
+                        var liWords = $(this).find("li").eq(i).html().length;
+                        sum = sum + liWords;
+                        if(sum>=7){
+                            $(this).find("li").eq(i).hide();
+                        }
+                    }
+                });
+            })
+        </script>
+    </head>
+    <body>
+        <ul>
+            <li>aa</li>
+            <li>aa</li>
+            <li>aa</li>
+            <li>aa</li>
+            <li>aa</li>
+            <li>aa</li>
+            <li>aa</li>
+            <li>aa</li>
+            <li>aa</li>
+            <li>aa</li>
+        </ul>
+        <ul>
+            <li>a</li>
+            <li>b</li>
+            <li>c</li>
+            <li>d</li>
+            <li>e</li>
+        </ul>
+    </body>
+</html>
