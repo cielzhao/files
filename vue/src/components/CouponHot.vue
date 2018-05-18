@@ -75,8 +75,8 @@ export default {
     },
     toDetail (key) {
     	let id = this.hotDataList[key].num_iid
-    	let curDetail = this.hotDataList
-    	sessionStorage.setItem("curDetail", JSON.stringify(menu)); //本地缓存数据
+    	let curDetail = this.hotDataList[key]
+    	sessionStorage.setItem("curDetail", JSON.stringify(curDetail)) //本地缓存数据
 			this.$router.push({path: '/Detail', query: {detailId: id}})
     }
 	}

@@ -4,16 +4,21 @@
 			<div class="divider">亲爱的，欢迎每天来选购超值优惠商品哦~每天都会准时更新</div>
 			<div class="detail">
 				<div class="detail-img">
-					<a rel="nofollow" href="https://uland.taobao.com/coupon/edetail?e=v77UHG3wtaYGQASttHIRqZV%2FMi9nl9KVkUgbh%2FzII8sX%2BirS02vCfMpYvxXDEjuM1IVOFrf4xakJ8sjBMRCyTZQ5wfGz%2Fu%2BN1fm3aBfYuJLMBAjZVSbr62uFqp8TFaHMpLyavqaJxJVU4vw5jpfu6w%3D%3D&amp;traceId=0ab84e8b15266335773192730e&amp;activityId=6206515bf24e48acb30740e4abf9ecdb" target="_blank" class="img " data-gid="8673854">
-            <img class="lg-img" src="https://img.alicdn.com/imgextra/i3/1822487212/TB2_5FErDlYBeNjSszcXXbwhFXa_!!1822487212.png_400x400.jpg" data-gid="8673854" alt="">
-            <ul class="sm-img"></ul>
+					<a rel="nofollow" :href="curDetail.item_url" target="_blank" class="img" :data-id="curDetail.num_iid">
+            <img class="lg-img" :src="curDetail.pict_url" alt="">
+            <ul class="sm-img">
+            	<li v-for="(item, key) in curDetail.small_images.string" :key="key">
+            		<img :src="item" alt="" />
+            	</li>
+            </ul>
           </a>
 				</div>
 
 				<div class="detail-info">
             <a class="title clearfix  " rel="nofollow" data-gid="8673854" href="https://uland.taobao.com/coupon/edetail?e=v77UHG3wtaYGQASttHIRqZV%2FMi9nl9KVkUgbh%2FzII8sX%2BirS02vCfMpYvxXDEjuM1IVOFrf4xakJ8sjBMRCyTZQ5wfGz%2Fu%2BN1fm3aBfYuJLMBAjZVSbr62uFqp8TFaHMpLyavqaJxJVU4vw5jpfu6w%3D%3D&amp;traceId=0ab84e8b15266335773192730e&amp;activityId=6206515bf24e48acb30740e4abf9ecdb" target="_blank">
-              <span class="tmall"></span>
-              <span class="title">高汤肉粽双蛋黄豆沙粽子礼盒装1280g</span>
+              <span class="tmall" v-if="curDetail.user_type == 0"></span>
+              <span class="taobao" v-if="curDetail.user_type == 1"></span>
+              <span class="title">{{curDetail.title}}</span>
 						</a>
 						<a href="/index.php?r=index/feedbackpc&amp;id=8673854" class="pc-spjc"><i></i>商品反馈</a>
 
@@ -22,8 +27,8 @@
             </div>
 
             <div class="coupon-wrap clearfix">
-              <span class="now-price"><b class="theme-color-8">(独享)</b>券后价&nbsp;&nbsp;&nbsp;&nbsp;<b class="theme-color-8">¥<i>78</i></b></span>
-              <span class="org-price">在售价&nbsp;&nbsp;¥<i>108</i></span>
+              <span class="now-price"><b class="theme-color-8">(独享)</b>券后价&nbsp;&nbsp;&nbsp;&nbsp;<b class="theme-color-8">¥<i>{{curDetail.zk_final_price}}</i></b></span>
+              <span class="org-price">在售价&nbsp;&nbsp;¥<i>{{curDetail.reserve_price}}</i></span>
             </div>
 
             <div class="text-wrap">
@@ -70,7 +75,16 @@ export default {
 	name: 'DetailMain',
 	data() {
 		return {
-
+			curDetail: null
+		}
+	},
+	created () {
+    this.getData()
+  },
+	methods: {
+		getData() {
+			this.curDetail = JSON.parse(sessionStorage.getItem("curDetail")) //获取缓存数据
+			console.log(this.curDetail)
 		}
 	}
 }
@@ -438,5 +452,28 @@ export default {
     right: 10px;
     top: 10px
 }
+.detail .sm-img li {
+    width: 55px;
+    height: 55px;
+    float: left;
+    margin-left: 13px;
+    margin-top: 13px;
+    cursor: auto
+}
 
+.detail .sm-img li:first-child {
+    margin-left: 0
+}
+
+.detail .sm-img li img {
+    width: 55px;
+    height: 55px;
+    display: block;
+    border: 1px solid transparent;
+    cursor: pointer
+}
+
+.detail .sm-img li img:hover {
+    border: 1px solid red
+}
 </style>
