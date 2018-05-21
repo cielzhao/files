@@ -18,50 +18,77 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      name: 'Index',
+    	name: 'Index',
       path: '/',
       component: Index,
       children: [
-        {name: 'Header', path: '/', component: Header},
-        {name: 'Nav', path: '/', component: Nav},
+        {name: 'Header', path: '/Header', component: Header},
+        {name: 'Nav', path: '/Nav', component: Nav},
         {
-        	name: 'Banner',
-        	path: '/',
+        	path: 'Banner',
         	component: Banner,
         	children: [
-		        {name: 'BannerSwiper', path: '/', component: BannerSwiper},
-		        {name: 'BannerShare', path: '/', component: BannerShare},
+		        {name: 'BannerSwiper', path: '/BannerSwiper', component: BannerSwiper},
+		        {name: 'BannerShare', path: '/BannerShare', component: BannerShare},
 		      ]
         },
         {
-        	name: 'Main',
-        	path: '/',
+        	path: '/Main',
         	component: Main,
         	children: [
-		        {name: 'CouponHot', path: '/', component: CouponHot},
-		        {name: 'CouponLive', path: '/', component: CouponLive},
+		        {name: 'CouponHot', path: '/CouponHot', component: CouponHot},
+		        {name: 'CouponLive', path: '/CouponLive', component: CouponLive},
 		      ]
         },
-        {name: 'Footer', path: '/', component: Footer},
+        {name: 'Footer', path: '/Footer', component: Footer},
       ]
     },
     {
-      name: 'Detail',
-      path: '/Detail',
+    	name: 'Detail',
+      path: '/Detail/:pageId',
       component: Detail,
       children: [
-        {name: 'Header', path: '/', component: Header},
-        {name: 'Nav', path: '/', component: Nav},
         {
-        	name: 'DetailMain',
-        	path: '/',
+        	redirect: {
+			      name: 'Header'
+			    },
+			    path: '/Header',
+			    component: Header
+        },
+        {
+        	redirect: {
+			      name: 'Nav'
+			    },
+			    path: '/Nav',
+			    component: Nav
+        },
+        {
+        	path: '/DetailMain',
         	component: DetailMain,
         	children: [
-		        {name: 'CouponHot', path: '/', component: CouponHot},
-		        {name: 'CouponLive', path: '/', component: CouponLive},
+		        {
+		        	redirect: {
+					      name: 'CouponHot'
+					    },
+		        	path: '/CouponHot',
+		        	component: CouponHot
+		        },
+		        {
+		        	redirect: {
+					      name: 'CouponLive'
+					    },
+		        	path: '/CouponLive',
+		        	component: CouponLive
+		        },
 		      ]
         },
-        {name: 'Footer', path: '/', component: Footer},
+        {
+        	redirect: {
+			      name: 'Footer'
+			    },
+			    path: '/Footer',
+			    component: Footer
+        },
       ]
     }
   ]

@@ -13,7 +13,7 @@
 		<div class="header-con">
 			<div class="container">
 				<div class="header-con-logo fl">
-					<a href="index.html">精品女装</a>
+					<a href="javascript:;">精品女装</a>
 				</div>
 				<div class="header-con-search fr">
 					<div id="search">

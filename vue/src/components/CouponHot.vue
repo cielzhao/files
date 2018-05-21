@@ -50,11 +50,13 @@ import axios from 'axios'
 
 export default {
 	name: 'CouponHot',
+	props: ['pageId'],
 	data() {
 		return {
 			hotData: null,
 			hotDataList: null,
-			requestId: ''
+			requestId: '',
+			dataId: this.pageId
 		}
 	},
 	created () {
@@ -64,11 +66,11 @@ export default {
 		fetchData () {
     	var _this = this
     	const apiUrl = ''
-      axios.get('http://localhost:8081/static/json/data.json').then(function (response) {
+      axios.get('../static/json/data.json').then(function (response) {
       	_this.hotData = response.data.item_get_response
       	_this.hotDataList = _this.hotData.results.n_tbk_item
       	_this.requestId = _this.hotDataList.request_id
-      	console.log(_this.hotDataList[0])
+      	console.log(_this.dataId)
       }).catch((error) => {
         console.log(error)
       })
@@ -77,7 +79,7 @@ export default {
     	let id = this.hotDataList[key].num_iid
     	let curDetail = this.hotDataList[key]
     	sessionStorage.setItem("curDetail", JSON.stringify(curDetail)) //本地缓存数据
-			this.$router.push({path: '/Detail', query: {detailId: id}})
+			this.$router.push({ name: 'Detail', query: { detailId: id }})
     }
 	}
 }

@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="divider">亲爱的，欢迎每天来选购超值优惠商品哦~每天都会准时更新</div>
 			<div class="coupon">
-				<CouponHot></CouponHot>
+				<CouponHot :pageId="pageId"></CouponHot>
 			</div>
 		</div>
 	</div>
@@ -11,13 +11,28 @@
 
 <script>
 import CouponHot from './CouponHot'
-import CouponLive from './CouponLive'
+import bus from '../assets/eventBus'
 
 export default {
 	name: 'Main',
+	data () {
+		return {
+			pageId: '0'
+		}
+	},
 	components: {
     'CouponHot': CouponHot,
-    'CouponLive': CouponLive,
+  },
+  created() {
+	 	var self = this
+//	 	bus.$on('pageId', function(pageId) {
+//	 		self.pageId = pageId
+//	 		console.log(self.pageId)
+//	 	})
+	 	bus.$on('getTarget', function (id) {
+	 		self.pageId = id
+		  console.log(id)
+		})
   }
 }
 </script>
