@@ -1,9 +1,7 @@
 <template>
 	<nav id="nav">
 		<div class="container">
-			<li></li>
-			<router-link class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="item.pageId" @click="sendMsg(key)" :to="{ name: 'Index', query: { pageId: item.pageId }}" tag="li">{{item.text}}</router-link>
-			<!--<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="item.pageId" @click="sendMsg(key)">{{item.text}}</li>-->
+			<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="item.pageId" @click="sendMsg(key, $event)">{{item.text}}</li>
 		</div>
 	</nav>
 </template>
@@ -31,10 +29,15 @@ export default {
 	},
 	methods: {
 		sendMsg: function(key) {
-//			console.log(key)
-//			bus.$emit('pageId', key)
-			bus.$emit('getTarget', key);
-//			this.$router.push({ name: 'Index', params: { pageId: key}})
+			var oNavItem = document.querySelectorAll('.nav-item')
+			var length = oNavItem.length
+			for(var i = 0; i < length; i++) {
+				oNavItem[i].classList.remove("active")
+			}
+			oNavItem[key].classList.add("active")
+
+			bus.$emit('getTarget', key)
+			this.$router.push({ path: '/', query: { index: key}})
 		}
 
 	}

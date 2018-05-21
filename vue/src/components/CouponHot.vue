@@ -47,26 +47,33 @@
 
 <script>
 import axios from 'axios'
+import bus from '../assets/eventBus'
 
 export default {
 	name: 'CouponHot',
-	props: ['pageId'],
 	data() {
 		return {
 			hotData: null,
 			hotDataList: null,
 			requestId: '',
-			dataId: this.pageId
+			pageId: 0
 		}
 	},
-	created () {
-    this.fetchData()
+  created() {
+	 	var self = this
+	 	bus.$on('getTarget', function (id) {
+	 		self.pageId = id
+		})
+
+	 	this.fetchData()
   },
 	methods: {
 		fetchData () {
     	var _this = this
-    	const apiUrl = ''
-      axios.get('../static/json/data.json').then(function (response) {
+
+	 		console.log(self.pageId)
+    	const apiUrl = "../static/json/data" + _this.pageId + ".json"
+      axios.get(apiUrl).then(function (response) {
       	_this.hotData = response.data.item_get_response
       	_this.hotDataList = _this.hotData.results.n_tbk_item
       	_this.requestId = _this.hotDataList.request_id
@@ -80,6 +87,11 @@ export default {
     	let curDetail = this.hotDataList[key]
     	sessionStorage.setItem("curDetail", JSON.stringify(curDetail)) //本地缓存数据
 			this.$router.push({ name: 'Detail', query: { detailId: id }})
+    }
+	},
+	watch: {
+		$route(to, from) {
+      this.fetchData()
     }
 	}
 }
