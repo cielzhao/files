@@ -27,19 +27,30 @@ export default {
 	    ]
 		}
 	},
+	created() {
+//		this.navStyle()
+	},
 	methods: {
 		sendMsg: function(key) {
-			var oNavItem = document.querySelectorAll('.nav-item')
-			var length = oNavItem.length
-			for(var i = 0; i < length; i++) {
+			let oNavItem = document.querySelectorAll('.nav-item')
+			let length = oNavItem.length
+			for(let i = 0; i < length; i++) {
 				oNavItem[i].classList.remove("active")
 			}
 			oNavItem[key].classList.add("active")
 
 			bus.$emit('getTarget', key)
 			this.$router.push({ path: '/', query: { index: key}})
+		},
+		navStyle: function() {
+			let curPageId = window.location.href.split('?')[1].split('=')[1]
+			let oNavItem = document.querySelectorAll('.nav-item')
+			let length = oNavItem.length
+			for(let i = 0; i < length; i++) {
+				oNavItem[i].classList.remove("active")
+			}
+			oNavItem[curPageId].classList.add("active")
 		}
-
 	}
 }
 </script>

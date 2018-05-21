@@ -33,7 +33,7 @@ export default new Router({
 		      ]
         },
         {
-        	path: '/Main',
+        	path: 'Main',
         	component: Main,
         	children: [
 		        {name: 'CouponHot', path: '/CouponHot', component: CouponHot},
@@ -52,32 +52,32 @@ export default new Router({
         	redirect: {
 			      name: 'Header'
 			    },
-			    path: '/Header',
+			    path: 'Header',
 			    component: Header
         },
         {
         	redirect: {
 			      name: 'Nav'
 			    },
-			    path: '/Nav',
+			    path: 'Nav',
 			    component: Nav
         },
         {
-        	path: '/DetailMain',
+        	path: 'DetailMain',
         	component: DetailMain,
         	children: [
 		        {
 		        	redirect: {
 					      name: 'CouponHot'
 					    },
-		        	path: '/CouponHot',
+		        	path: 'CouponHot',
 		        	component: CouponHot
 		        },
 		        {
 		        	redirect: {
 					      name: 'CouponLive'
 					    },
-		        	path: '/CouponLive',
+		        	path: 'CouponLive',
 		        	component: CouponLive
 		        },
 		      ]
@@ -86,7 +86,7 @@ export default new Router({
         	redirect: {
 			      name: 'Footer'
 			    },
-			    path: '/Footer',
+			    path: 'Footer',
 			    component: Footer
         },
       ]

@@ -70,8 +70,6 @@ export default {
 	methods: {
 		fetchData () {
     	var _this = this
-
-	 		console.log(self.pageId)
     	const apiUrl = "../static/json/data" + _this.pageId + ".json"
       axios.get(apiUrl).then(function (response) {
       	_this.hotData = response.data.item_get_response
