@@ -1,13 +1,16 @@
 <template>
 	<nav id="nav">
 		<div class="container">
-			<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="item.pageId" @click="sendMsg(key, $event)">{{item.text}}</li>
+			<!--<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="item.pageId" @click="sendMsg(key, $event)">{{item.text}}</li>-->
+			<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="key">
+				<router-link v-if="item.pageId == 0" :to="{name: 'index', params: {n:item.pageId}}">{{item.text}}</router-link>
+				<router-link v-if="item.pageId != 0" :to="{name: 'coupon', params: {c:'fz', n:1}}">{{item.text}}</router-link>
+			</li>
 		</div>
 	</nav>
 </template>
 
 <script>
-import bus from '../assets/eventBus'
 export default {
 	name: 'Nav',
 	data () {
@@ -20,36 +23,26 @@ export default {
 	      	pageId: 0
 	      },
 	      {
-	      	text: '领券优惠直播',
+	      	text: '领券优惠',
 	      	active: false,
 	      	pageId: 1
 	      }
 	    ]
 		}
 	},
-	created() {
-//		this.navStyle()
+	mounted () {
+		this.navStyle()
 	},
 	methods: {
-		sendMsg: function(key) {
-			let oNavItem = document.querySelectorAll('.nav-item')
-			let length = oNavItem.length
-			for(let i = 0; i < length; i++) {
-				oNavItem[i].classList.remove("active")
-			}
-			oNavItem[key].classList.add("active")
-
-			bus.$emit('getTarget', key)
-			this.$router.push({ path: '/', query: { index: key}})
-		},
 		navStyle: function() {
-			let curPageId = window.location.href.split('?')[1].split('=')[1]
+			let curPageId = this.$route.params.n
 			let oNavItem = document.querySelectorAll('.nav-item')
 			let length = oNavItem.length
 			for(let i = 0; i < length; i++) {
 				oNavItem[i].classList.remove("active")
 			}
 			oNavItem[curPageId].classList.add("active")
+				console.log( this.$route.params.n)
 		}
 	}
 }
@@ -69,9 +62,7 @@ export default {
   cursor: pointer;
 }
 #nav .nav-item.active,
-#nav .nav-item:hover,
-#nav .router-link-exact-active,
-#nav .nav-item.router-link-exact-active.router-link-active.active {
+#nav .nav-item:hover {
 	background-color: #bd166f;
 }
 #nav .nav-item.router-link-active.active {

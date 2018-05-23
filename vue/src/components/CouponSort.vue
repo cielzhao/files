@@ -1,0 +1,175 @@
+<template>
+	<div class="tag-wrap main-container clearfix cat-wrap">
+    <div class="fixed-wrap fl theme-a-hover-active-border-top-1">
+      <a href="javascript:;" class="tag-fixed active">人气</a>
+      <a href="javascript:;" class="tag-fixed ">最新</a>
+      <a href="javascript:;" class="tag-fixed ">销量</a>
+      <a href="javascript:;" class="tag-fixed ">价格</a>
+      <div class="sort-price-area fl">
+        <form action="">
+            <input type="hidden" name="cid" value="0">
+            <input type="hidden" name="s" value="t">
+            <input type="hidden" name="r" value="l">
+            <input class="min-price" name="jgqj1" value="" placeholder="￥">
+            <span>-</span>
+            <input class="max-price" name="jgqj2" value="" placeholder="￥">
+            <button class="theme-bg-color-1 theme-hover-bg-color-3">确定</button>
+            <a class="clear-price" href="javascript:;">清除</a>
+        </form>
+      </div>
+    </div>
+    <div class="goods-pages-page clearfix" style="">
+			<span class="pagebtn disabled pre-page"></span>
+      <span class="page-num"><b>1</b>/666</span>
+      <span class="pagebtn next-page"><a href="javascript:;"></a></span>
+    </div>
+	</div>
+</template>
+
+<script>
+import CouponLive from './CouponLive'
+
+export default {
+  name: 'Index',
+  components: {
+    'CouponLive': CouponLive,
+  },
+  computed:{
+
+  },
+  methods:{
+  }
+}
+</script>
+
+<style>
+.tag-wrap .fixed-wrap {
+    float: left;
+    position: absolute;
+    left: 0;
+    top: -1px;
+    max-width: 1108px
+}
+
+.tag-wrap .fixed-wrap .tag-fixed {
+    float: left;
+    line-height: 40px;
+    height: 39px;
+    border-right: #eee 1px solid;
+    padding: 0 20px;
+    color: #666;
+    position: relative
+}
+
+.tag-wrap .fixed-wrap .tag-fixed:focus .icon,.tag-wrap .fixed-wrap .tag-fixed:hover .icon {
+    /*background: url(/images/select_icon.png?v=20184103648381) 0 -13px no-repeat*/
+}
+
+.tag-wrap .fixed-wrap .active,.tag-wrap .fixed-wrap .tag-fixed:focus,.tag-wrap .fixed-wrap .tag-fixed:hover {
+    border-top: 2px red solid;
+    color: red;
+    background: #fff;
+    line-height: 36px;
+    height: 37px
+}
+
+.tag-wrap .fixed-wrap .sort-price-area {
+    width: 180px;
+    margin-left: 20px;
+    padding: 7px 10px;
+    margin-top: 1px;
+    position: relative
+}
+
+.tag-wrap .fixed-wrap .sort-price-area:hover {
+    background: #fff;
+    box-shadow: 0 0 6px 0 rgba(170,170,170,.3)
+}
+
+.tag-wrap .fixed-wrap .sort-price-area a.clear-price {
+    display: none;
+    position: absolute;
+    right: 14px;
+    top: 11px;
+    height: 16px;
+    line-height: 16px
+}
+
+.tag-wrap .fixed-wrap .sort-price-area:hover a.clear-price,.tag-wrap .fixed-wrap .sort-price-area:hover button {
+    display: block
+}
+
+.tag-wrap .fixed-wrap .sort-price-area a:hover.clear-price {
+    text-decoration: underline
+}
+
+.tag-wrap .fixed-wrap .sort-price-area button {
+    display: none;
+    width: 40px;
+    height: 24px;
+    border-radius: 4px;
+    background: #ff6255;
+    color: #fff;
+    text-align: center;
+    line-height: 24px;
+    border: none;
+    outline: 0;
+    font-size: 12px;
+    float: left;
+    margin-left: 10px
+}
+
+.tag-wrap .fixed-wrap .sort-price-area:hover button:hover {
+    background: #f44c3e
+}
+
+.tag-wrap .fixed-wrap .sort-price-area span {
+    float: left;
+    height: 24px;
+    line-height: 22px;
+    padding: 0 2px
+}
+
+.tag-wrap .fixed-wrap .sort-price-area input {
+    width: 30px;
+    height: 14px;
+    padding: 4px;
+    float: left;
+    color: #999;
+    font-family: Microsoft Yahei;
+    border: 1px solid #eee;
+    font-size: 12px
+}
+
+.tag-wrap .split {
+    height: 25px;
+    background-color: #CCC;
+    width: 1px;
+    float: left;
+    overflow: hidden;
+    margin-left: 50px;
+    margin-top: 5px
+}
+
+.tag-wrap .tags {
+    float: left;
+    font-size: 12px;
+    color: #666;
+    line-height: 37px
+}
+
+.tag-wrap .tags span {
+    float: left;
+    margin-left: 20px
+}
+
+.tag-wrap .tags a {
+    float: left;
+    color: #5fa1ca;
+    margin: auto 8px
+}
+
+.tag-wrap .tags .active,.tag-wrap .tags a:focus,.tag-wrap .tags a:hover {
+    color: red
+}
+</style>

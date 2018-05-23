@@ -6,6 +6,11 @@ import router from './router'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 
+//import Vuex from 'vuex'
+//Vue.use(Vuex)
+
+import store from './store/store'
+
 Vue.config.productionTip = false
 
 let bus = new Vue()
@@ -15,6 +20,7 @@ Vue.prototype.bus = bus
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'

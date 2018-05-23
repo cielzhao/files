@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Home from '@/components/Home'
 import Index from '@/components/Index'
+import Coupon from '@/components/Coupon'
 import Header from '@/components/Header'
 import Nav from '@/components/Nav'
 import Banner from '@/components/Banner'
@@ -18,30 +20,19 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-    	name: 'Index',
+    	name: 'Home',
       path: '/',
-      component: Index,
-      children: [
-        {name: 'Header', path: '/Header', component: Header},
-        {name: 'Nav', path: '/Nav', component: Nav},
-        {
-        	path: 'Banner',
-        	component: Banner,
-        	children: [
-		        {name: 'BannerSwiper', path: '/BannerSwiper', component: BannerSwiper},
-		        {name: 'BannerShare', path: '/BannerShare', component: BannerShare},
-		      ]
-        },
-        {
-        	path: 'Main',
-        	component: Main,
-        	children: [
-		        {name: 'CouponHot', path: '/CouponHot', component: CouponHot},
-		        {name: 'CouponLive', path: '/CouponLive', component: CouponLive},
-		      ]
-        },
-        {name: 'Footer', path: '/Footer', component: Footer},
-      ]
+      component: Home
+    },
+    {
+    	name: 'index',
+      path: '/index/n/:n',
+      component: Index
+    },
+    {
+    	name: 'coupon',
+      path: '/coupon/:c/n/:n',
+      component: Coupon
     },
     {
     	name: 'Detail',

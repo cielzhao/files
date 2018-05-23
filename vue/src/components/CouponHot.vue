@@ -69,13 +69,15 @@ export default {
   },
 	methods: {
 		fetchData () {
+			console.log( this.$route.params.c)
     	var _this = this
-    	const apiUrl = "../static/json/data" + _this.pageId + ".json"
+//  	const apiUrl = "http://werlike.com/tb/api/" + _this.pageId + ".php"
+    	const apiUrl = "http://werlike.com/tb/api/fz.php"
       axios.get(apiUrl).then(function (response) {
-      	_this.hotData = response.data.item_get_response
-      	_this.hotDataList = _this.hotData.results.n_tbk_item
-      	_this.requestId = _this.hotDataList.request_id
-      	console.log(_this.dataId)
+      	console.log(response)
+//    	_this.hotData = response.data.item_get_response
+//    	_this.hotDataList = _this.hotData.results.n_tbk_item
+//    	_this.requestId = _this.hotDataList.request_id
       }).catch((error) => {
         console.log(error)
       })
