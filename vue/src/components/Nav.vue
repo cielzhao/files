@@ -35,7 +35,13 @@ export default {
 	},
 	methods: {
 		navStyle: function() {
-			let curPageId = this.$route.params.n
+			console.log(this.$route.params.n)
+			if(this.$route.params.n != undefined) {
+				var curPageId = this.$route.params.n
+			} else {
+				var curPageId = 0
+			}
+
 			let oNavItem = document.querySelectorAll('.nav-item')
 			let length = oNavItem.length
 			for(let i = 0; i < length; i++) {
