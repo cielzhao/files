@@ -15,28 +15,29 @@
       </div>
 		</div>
 		<div class="hot-product">
-			<div class="product-list" v-for="(item, key) in hotDataList" :key="item.num_iid" @click="toDetail(key)">
-        <a class="main-img" href="javascript:;" target="_blank">
-          <img :src="item.pict_url">
+			<div class="product-list" v-for="(item, key) in hotDataList" :key="key">
+        <a class="main-img" href="javascript:;" target="_blank" @click="toDetail(key)">
+          <img :src="item.商品主图">
         </a>
         <div class="product-intro fr">
             <p class="product-title">
-                <a  href="javascript:;" target="_blank" :title="item.title" >{{item.title}}</a>
+                <a  href="javascript:;" target="_blank" :title="item.title" >{{item.商品名称}}</a>
             </p>
             <div class="product-price">
-                <span>券<b><i>￥</i>10</b></span>
-                <div class="shop">店铺名称：{{item.nick}}</div>
+                <span v-if="item.优惠券面额.indexOf('减')!=-1">券<b><i>￥</i>{{item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)}}</b></span>
+                <span v-else="item.优惠券面额.indexOf('减')==-1">券<b><i>￥</i>{{item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</b></span>
+                <div class="shop">店铺名称：{{item.店铺名称}}</div>
             </div>
-            <div class="residue">优惠券总数<i class="color_p theme-color-1">5000</i>张</div>
-
+            <div class="residue">优惠券总数<i>{{item.优惠券总量}}</i>张，剩余<i>{{item.优惠券剩余量}}</i>张</div>
             <div class="buy">
-                <div class="buy-price">{{item.reserve_price}}</div>
+                <div class="buy-price" v-if="item.优惠券面额.indexOf('减')!=-1">{{item.商品价格 - item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)}}</div>
+                <div class="buy-price" v-else="item.优惠券面额.indexOf('减')==-1">{{item.商品价格 - item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</div>
                 <div class="old-price">
-                    <p><i>￥</i>{{item.zk_final_price}}</p>
+                    <p><i>￥</i>{{item.商品价格}}</p>
                     <span>券后价</span>
                 </div>
                 <div class="go-buy">
-                    <a  href="javascript:;" target="_blank">去抢购</a>
+                    <a :href="item.优惠券短链接" target="_blank">去抢购</a>
                 </div>
             </div>
         </div>
@@ -47,7 +48,7 @@
 
 <script>
 import axios from 'axios'
-import bus from '../assets/eventBus'
+import api from '../api/api.js'
 
 export default {
 	name: 'CouponHot',
@@ -60,38 +61,26 @@ export default {
 		}
 	},
   created() {
-	 	var self = this
-	 	bus.$on('getTarget', function (id) {
-	 		self.pageId = id
-		})
-
 	 	this.fetchData()
   },
 	methods: {
 		fetchData () {
-			console.log( this.$route.params.c)
-    	var _this = this
-//  	const apiUrl = "http://werlike.com/tb/api/" + _this.pageId + ".php"
-    	const apiUrl = "http://werlike.com/tb/api/fz.php"
+			const _this = this
+    	let apiUrl = api.curApi + "fz.php"
       axios.get(apiUrl).then(function (response) {
-      	console.log(response)
-//    	_this.hotData = response.data.item_get_response
-//    	_this.hotDataList = _this.hotData.results.n_tbk_item
-//    	_this.requestId = _this.hotDataList.request_id
+      	console.log(response.data)
+      	_this.hotData = response.data
+      	_this.hotDataList = _this.hotData.data
+      	_this.requestId = _this.hotDataList.商品id
       }).catch((error) => {
         console.log(error)
       })
     },
     toDetail (key) {
-    	let id = this.hotDataList[key].num_iid
+    	let id = this.hotDataList[key].商品id
     	let curDetail = this.hotDataList[key]
     	sessionStorage.setItem("curDetail", JSON.stringify(curDetail)) //本地缓存数据
 			this.$router.push({ name: 'Detail', query: { detailId: id }})
-    }
-	},
-	watch: {
-		$route(to, from) {
-      this.fetchData()
     }
 	}
 }

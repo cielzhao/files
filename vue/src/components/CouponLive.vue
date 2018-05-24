@@ -2,7 +2,7 @@
 	<div class="live">
 		<div class="hot-head">
 			<div class="hot-head-left fl">
-        <h1>领券优惠直播<span class="tatal">67772</span></h1>
+        <h1>领券优惠<span class="tatal" v-if="hotData">{{hotData.total}}</span></h1>
       </div>
       <div class="hot-head-right fr">
         <span style="color: #505050;">更多优惠 »</span>
@@ -10,21 +10,23 @@
 		</div>
 		<div class="goods-list">
 			<ul class="clearfix">
-				<li class="theme-hover-border-color-1 ">
-          <a href="javascript:;" class="img" target="_blank">
+				<li v-for="(item, key) in hotDataList" :key="key">
+          <a href="javascript:;" class="img" target="_blank" @click="toDetail(key)">
             <i class="today-new"></i>
-            <img src="https://img.alicdn.com/imgextra/i3/190903296/TB2pS_hXhUaBuNjt_fPXXXOoFXa_!!190903296.jpg_310x310.jpg" alt="">
+            <img :src="item.商品主图" alt="">
           </a>
           <div class="goods-padding">
             <div class="coupon-wrap clearfix">
-              <span class="price theme-color-8"><b><i>￥</i>24.9</b>券后价</span>
-              <span class="coupon theme-bg-color-9 theme-color-1 theme-border-color-1">券<b><i>￥</i>25</b></span>
+              <span class="price" v-if="item.优惠券面额.indexOf('减')!=-1"><b><i>￥</i>{{item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)}}</b>券后价</span>
+              <span class="price" v-else="item.优惠券面额.indexOf('减')==-1"><b><i>￥</i>{{item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</b>券后价</span>
+              <span class="coupon" v-if="item.优惠券面额.indexOf('减')!=-1">券<b><i>￥</i>{{item.商品价格 - item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)}}</b></span>
+              <span class="coupon" v-else="item.优惠券面额.indexOf('减')==-1">券<b><i>￥</i>{{item.商品价格 - item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</b></span>
             </div>
             <div class="title">
-              <a href="javascript:;">五芳斋 端午喜乐鲜肉蛋黄豆沙粽10只装</a>
+              <a href="javascript:;">{{item.商品名称}}</a>
             </div>
             <div class="goods-num-type">
-              <span class="goods-num">销量<b>121378</b></span>
+              <span class="goods-num">销量<b>{{item.商品月销量}}</b></span>
               <div class="goods-type">
               	<i class="tmall" title="天猫"></i><i class="trans" title="运费险"></i><i class="you" title="优品"></i><i class="miaosha" title="秒杀"></i>                                </div>
           		</div>
@@ -36,8 +38,58 @@
 </template>
 
 <script>
+import axios from 'axios'
+import api from '../api/api.js'
+
 export default {
-	name: 'CouponLive'
+	name: 'CouponLive',
+	data() {
+		return {
+			hotData: null,
+			hotDataList: null,
+			requestId: '',
+			pageId: 0
+		}
+	},
+  created() {
+	 	this.fetchData()
+  },
+  updated() {
+//	 	this.fetchData()
+  },
+	methods: {
+		fetchData () {
+			const _this = this
+			let cParam = this.$route.params.c
+    	console.log(cParam)
+
+    	if(/^[\u3220-\uFA29]+$/.test(cParam)) {
+				var apiUrl = api.curApi + "search.php" + "?q=" + cParam
+    	} else {
+    		var apiUrl = api.curApi + cParam + ".php"
+    	}
+
+      axios.get(apiUrl).then(function (response) {
+      	console.log(response.data)
+      	_this.hotData = response.data
+      	_this.hotDataList = _this.hotData.data
+      	_this.requestId = _this.hotDataList.商品id
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+    toDetail (key) {
+    	let id = this.hotDataList[key].商品id
+    	let curDetail = this.hotDataList[key]
+    	sessionStorage.setItem("curDetail", JSON.stringify(curDetail)) //本地缓存数据
+			this.$router.push({ name: 'Detail', query: { detailId: id }})
+    }
+	},
+	watch: {
+    '$route' (to, from) {
+      this.fetchData()
+    }
+  }
 }
 </script>
 
@@ -160,5 +212,11 @@ export default {
 }
 .goods-type i.you {
     background-position-x: -52px;
+}
+.goods-list ul li a.img img {
+    border: none;
+    max-width: 284px;
+    max-height: 284px;
+    vertical-align: middle;
 }
 </style>

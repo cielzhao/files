@@ -3,59 +3,9 @@
     <div class="cat-list clearfix">
 	        <span class="cat-lit-title">商品分类</span>
 	        <ul>
-            <li class="active">
-                <a class="theme-a" href="javascript:;">全部优惠<b class="theme-b">(66528)</b></a>
-            </li>
-            <li class="">
-                <a class="theme-a" data-page="page=1" href="/index.php?r=l&amp;cid=1&amp;u=925820">
-                    女装<b class="theme-b">(7143)</b>
-                </a>
-            </li>
-            <li class="">
-                <a class="theme-a" data-page="page=1" href="/index.php?r=l&amp;cid=9&amp;u=925820">
-                    男装<b class="theme-b">(4126)</b>
-                </a>
-            </li>
-            <li class="">
-                <a class="theme-a" data-page="page=1" href="/index.php?r=l&amp;cid=10&amp;u=925820">
-                    内衣<b class="theme-b">(4176)</b>
-                </a>
-            </li>
-            <li class="">
-                <a class="theme-a" data-page="page=1" href="/index.php?r=l&amp;cid=2&amp;u=925820">
-                    母婴<b class="theme-b">(7866)</b>
-                </a>
-            </li>
-            <li class="">
-                <a class="theme-a" data-page="page=1" href="/index.php?r=l&amp;cid=3&amp;u=925820">
-                    化妆品<b class="theme-b">(4062)</b>
-                </a>
-            </li>
-            <li class="">
-                <a class="theme-a" data-page="page=1" href="/index.php?r=l&amp;cid=4&amp;u=925820">
-                    居家<b class="theme-b">(13749)</b>
-                </a>
-            </li>
-            <li class="">
-                <a class="theme-a" data-page="page=1" href="/index.php?r=l&amp;cid=5&amp;u=925820">
-                    鞋包配饰<b class="theme-b">(9080)</b>
-                </a>
-            </li>
-            <li class="">
-                <a class="theme-a" data-page="page=1" href="/index.php?r=l&amp;cid=6&amp;u=925820">
-                    美食<b class="theme-b">(6431)</b>
-                </a>
-            </li>
-            <li class="">
-                <a class="theme-a" data-page="page=1" href="/index.php?r=l&amp;cid=7&amp;u=925820">
-                    文体车品<b class="theme-b">(5356)</b>
-                </a>
-            </li>
-            <li class="">
-                <a class="theme-a" data-page="page=1" href="/index.php?r=l&amp;cid=8&amp;u=925820">
-                    数码家电<b class="theme-b">(4539)</b>
-                </a>
-            </li>
+            <li class="cat-item" v-for="(item, key) in cateData" :class="{'active': item.active}" :key="key" :data-item="item.paramItem" @click.native="cateStyle">
+							<router-link :to="{name:'coupon', params: {n:1, c:item.paramItem}}">{{item.text}}<b>(6431)</b></router-link>
+						</li>
          </ul>
 	    </div>
 
@@ -63,22 +13,22 @@
 	        <span class="cat-lit-title">促销类型</span>
 	        <ul>
 	            <li class="">
-	                <a class="theme-a" href="/index.php?r=l&amp;cid=0&amp;s=t&amp;seckill=1">秒杀活动</a>
+	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;seckill=1">秒杀活动</a>
 	            </li>
 	            <li class="">
-	                <a class="theme-a" href="/index.php?r=l&amp;cid=0&amp;s=t&amp;jipin=1">优选</a>
+	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;jipin=1">优选</a>
 	            </li>
 	            <li class="">
-	                <a class="theme-a" href="/index.php?r=l&amp;cid=0&amp;s=t&amp;tmall=1">天猫</a>
+	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;tmall=1">天猫</a>
 	            </li>
 	            <li class="">
-	                <a class="theme-a" href="/index.php?r=l&amp;cid=0&amp;s=t&amp;freight=1">运费险</a>
+	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;freight=1">运费险</a>
 	            </li>
 	            <li class="">
-	                <a class="theme-a" href="/index.php?r=l&amp;cid=0&amp;s=t&amp;amoy=1">海淘</a>
+	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;amoy=1">海淘</a>
 	            </li>
 	            <li class="cat-lit-video ">
-	                <a class="theme-a" href="/index.php?r=l&amp;cid=0&amp;s=t&amp;video=1"><span class="theme-span">视频商品</span></a>
+	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;video=1"><span class="theme-span">视频商品</span></a>
 	            </li>
 	        </ul>
 	    </div>
@@ -91,13 +41,99 @@ import CouponLive from './CouponLive'
 
 export default {
   name: 'Index',
+  data () {
+		return {
+			cateData: [
+			  {
+	      	text: '全部优惠',
+	      	active: true,
+	      	paramItem: 'search'
+	      },
+	      {
+	      	text: '女装',
+	      	active: false,
+	      	paramItem: 'fz'
+	      },
+	      {
+	      	text: '男装',
+	      	active: false,
+	      	paramItem: 'nz'
+	      },
+				{
+	      	text: '内衣',
+	      	active: false,
+	      	paramItem: 'ny'
+	      },
+	      {
+	      	text: '母婴',
+	      	active: false,
+	      	paramItem: 'my'
+	      },
+	      {
+	      	text: '化妆',
+	      	active: false,
+	      	paramItem: 'hz'
+	      },
+	      {
+	      	text: '居家日用',
+	      	active: false,
+	      	paramItem: 'jjry'
+	      },
+	      {
+	      	text: '鞋包配饰',
+	      	active: false,
+	      	paramItem: 'xbps'
+	      },
+	      {
+	      	text: '美食',
+	      	active: false,
+	      	paramItem: 'ms'
+	      },
+	      {
+	      	text: '文体车品',
+	      	active: false,
+	      	paramItem: 'wtcp'
+	      },
+	      {
+	      	text: '数码家电',
+	      	active: false,
+	      	paramItem: 'smjd'
+	      }
+			]
+		}
+	},
   components: {
     'CouponLive': CouponLive,
   },
-  computed:{
-
-  },
+	mounted () {
+		this.cateStyle()
+	},
   methods:{
+  	cateStyle: function() {
+  		let cParam = this.$route.params.c
+  		console.log(cParam)
+  		let oNavItem = document.querySelectorAll('.cat-item')
+			for(let i = 0; i < oNavItem.length; i++) {
+				oNavItem[i].classList.remove("active")
+			}
+
+			if(cParam == 'fz') {
+				oNavItem[1].classList.add('active')
+			} else {
+				for(let i = 0; i < oNavItem.length; i++) {
+					oNavItem[i].classList.remove("active")
+					let dataItem = oNavItem[i].getAttribute('data-item')
+					if(dataItem == cParam) {
+						oNavItem[i].classList.add('active')
+					}
+				}
+			}
+		}
+  },
+  watch: {
+    '$route' (to, from) {
+      this.cateStyle()
+    }
   }
 }
 </script>
@@ -201,7 +237,12 @@ export default {
     background: url(../assets/images/index/cms_pc_img.png?v=20184103648381) -99px -80px no-repeat #ff6255
 }
 
-.cat-wrap .cat-list ul .active a,.cat-wrap .cat-list ul .active a b,.cat-wrap .cat-list ul li a:focus,.cat-wrap .cat-list ul li a:focus b,.cat-wrap .cat-list ul li a:hover,.cat-wrap .cat-list ul li a:hover b {
+.cat-wrap .cat-list ul .active .router-link-active,
+.cat-wrap .cat-list ul .active .router-link-active b,
+.cat-wrap .cat-list ul li a:focus,
+.cat-wrap .cat-list ul li a:focus b,
+.cat-wrap .cat-list ul li a:hover,
+.cat-wrap .cat-list ul li a:hover b {
     color: #ff6255
 }
 

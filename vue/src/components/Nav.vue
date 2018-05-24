@@ -4,7 +4,7 @@
 			<!--<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="item.pageId" @click="sendMsg(key, $event)">{{item.text}}</li>-->
 			<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="key">
 				<router-link v-if="item.pageId == 0" :to="{name: 'index', params: {n:item.pageId}}">{{item.text}}</router-link>
-				<router-link v-if="item.pageId != 0" :to="{name: 'coupon', params: {c:'fz', n:1}}">{{item.text}}</router-link>
+				<router-link v-if="item.pageId != 0" :to="{name: 'coupon', params: {c:'search', n:1}}">{{item.text}}</router-link>
 			</li>
 		</div>
 	</nav>
@@ -48,7 +48,6 @@ export default {
 				oNavItem[i].classList.remove("active")
 			}
 			oNavItem[curPageId].classList.add("active")
-				console.log( this.$route.params.n)
 		}
 	}
 }
@@ -60,6 +59,9 @@ export default {
 	background-color: #ff6eb4;
 }
 #nav .nav-item {
+	display: inline-block;
+}
+#nav .nav-item a {
 	display: inline-block;
 	position: relative;
 	padding: 8px 27px;

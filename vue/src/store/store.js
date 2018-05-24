@@ -7,7 +7,7 @@ export default new Vuex.Store({
     show: true
   },
   mutations:{
-    changeBannerState(state){
+    cateState(state){
       state.show = false
     }
   }

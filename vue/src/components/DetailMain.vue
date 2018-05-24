@@ -4,45 +4,49 @@
 			<div class="divider">亲爱的，欢迎每天来选购超值优惠商品哦~每天都会准时更新</div>
 			<div class="detail">
 				<div class="detail-img">
-					<a rel="nofollow" :href="curDetail.item_url" target="_blank" class="img" :data-id="curDetail.num_iid">
-            <img class="lg-img" :src="curDetail.pict_url" alt="">
-            <ul class="sm-img">
+					<a rel="nofollow" :href="curDetail.商品详情页链接地址" target="_blank" class="img" :data-id="curDetail.商品id">
+            <img class="lg-img" :src="curDetail.商品主图" alt="">
+            <!--<ul class="sm-img">
             	<li v-for="(item, key) in curDetail.small_images.string" :key="key">
             		<img :src="item" alt="" />
             	</li>
-            </ul>
+            </ul>-->
           </a>
 				</div>
 
 				<div class="detail-info">
-            <a class="title clearfix  " rel="nofollow" data-gid="8673854" href="https://uland.taobao.com/coupon/edetail?e=v77UHG3wtaYGQASttHIRqZV%2FMi9nl9KVkUgbh%2FzII8sX%2BirS02vCfMpYvxXDEjuM1IVOFrf4xakJ8sjBMRCyTZQ5wfGz%2Fu%2BN1fm3aBfYuJLMBAjZVSbr62uFqp8TFaHMpLyavqaJxJVU4vw5jpfu6w%3D%3D&amp;traceId=0ab84e8b15266335773192730e&amp;activityId=6206515bf24e48acb30740e4abf9ecdb" target="_blank">
+            <a class="title clearfix" :href="curDetail.优惠券短链接" target="_blank">
               <span class="tmall" v-if="curDetail.user_type == 0"></span>
               <span class="taobao" v-if="curDetail.user_type == 1"></span>
-              <span class="title">{{curDetail.title}}</span>
+              <span class="title">{{curDetail.店铺名称}}</span>
 						</a>
-						<a href="/index.php?r=index/feedbackpc&amp;id=8673854" class="pc-spjc"><i></i>商品反馈</a>
+						<!--<a href="javascript:;" class="pc-spjc"><i></i>商品反馈</a>-->
 
-            <div class="desc">
-              <span class="theme-color-3">推荐理由：新派高端棕系列，木制礼盒装，适合商务送礼（可定制商务logo，私聊店主哦），细节决定品质，送礼首选！</span>
-            </div>
+            <!--<div class="desc">
+              <span>推荐理由：新派高端棕系列，木制礼盒装，适合商务送礼（可定制商务logo，私聊店主哦），细节决定品质，送礼首选！</span>
+            </div>-->
 
             <div class="coupon-wrap clearfix">
-              <span class="now-price"><b class="theme-color-8">(独享)</b>券后价&nbsp;&nbsp;&nbsp;&nbsp;<b class="theme-color-8">¥<i>{{curDetail.zk_final_price}}</i></b></span>
-              <span class="org-price">在售价&nbsp;&nbsp;¥<i>{{curDetail.reserve_price}}</i></span>
+              <span class="now-price"><b class="theme-color-8">(独享)</b>券后价&nbsp;&nbsp;&nbsp;<b>¥<i>{{curPrice}}</i></b></span>
+              <span class="org-price">在售价&nbsp;&nbsp;¥<i>{{curDetail.商品价格}}</i></span>
             </div>
 
             <div class="text-wrap">
-                <span class="text-wrap-span">优惠券总数<i>2000</i>张</span>
-                <span>已有<i>1516</i>人购买</span>
+                <span class="text-wrap-span">优惠券总数<i>{{curDetail.优惠券总量}}</i>张</span>
+                <span>已有<i>{{curDetail.优惠券剩余量}}</i>人购买</span>
+            </div>
+            <div class="buy-time">
+                <span class="text-wrap-span">开始时间：<i>{{curDetail.优惠券开始时间}}</i></span>
+                <span>结束时间：<i>{{curDetail.优惠券结束时间}}</i></span>
             </div>
 
             <!--商品领券状态s-->
-            <div class="ehy-normal theme-bg-color-8 clearfix">
-                <div class="buy-coupon theme-color-8">
+            <div class="ehy-normal clearfix">
+                <div class="buy-coupon">
                     <span>优惠券</span>
-                    <span><b><i>￥</i>30</b></span>
+                    <span><b><i>￥</i>{{curReduce}}</b></span>
                 </div>
-                <a data-gid="8673854" rel="nofollow" class="theme-bg-color-8" href="https://uland.taobao.com/coupon/edetail?e=v77UHG3wtaYGQASttHIRqZV%2FMi9nl9KVkUgbh%2FzII8sX%2BirS02vCfMpYvxXDEjuM1IVOFrf4xakJ8sjBMRCyTZQ5wfGz%2Fu%2BN1fm3aBfYuJLMBAjZVSbr62uFqp8TFaHMpLyavqaJxJVU4vw5jpfu6w%3D%3D&amp;traceId=0ab84e8b15266335773192730e&amp;activityId=6206515bf24e48acb30740e4abf9ecdb" target="_blank"> 领券购买</a>
+                <a :href="curDetail.优惠券短链接" target="_blank">领券购买</a>
             </div>
             <!--商品领券状态e-->
 
@@ -75,7 +79,9 @@ export default {
 	name: 'DetailMain',
 	data() {
 		return {
-			curDetail: null
+			curDetail: null,
+			curPrice: '',
+			curReduce: ''
 		}
 	},
 	created () {
@@ -85,6 +91,9 @@ export default {
 		getData() {
 			this.curDetail = JSON.parse(sessionStorage.getItem("curDetail")) //获取缓存数据
 			console.log(this.curDetail)
+			this.curReduce = this.curDetail.优惠券面额.match(/减(\S*)元/)[1]
+			this.curPrice = this.curDetail.商品价格 - this.curReduce
+			console.log(this.curPrice)
 		}
 	}
 }
@@ -475,5 +484,26 @@ export default {
 
 .detail .sm-img li img:hover {
     border: 1px solid red
+}
+.buy-time {
+	border-bottom: 1px dotted #C9C9C9;
+}
+.buy-time span {
+	display: inline-block;
+	height: 16px;
+  line-height: 16px;
+  padding: 10px 0;
+  font-size: 12px;
+  color: #8E8787;
+}
+.buy-time span.text-wrap-span {
+	  border-right: 1px solid #E5DFDA;
+    padding: 0 20px;
+    margin-right: 20px;
+}
+.buy-time span i {
+  margin: 0 5px;
+  color: #ed145b;
+  font-family: Arial;
 }
 </style>

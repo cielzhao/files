@@ -31,7 +31,7 @@ export default new Router({
     },
     {
     	name: 'coupon',
-      path: '/coupon/:c/n/:n',
+      path: '/coupon/n/:n/c/:c',
       component: Coupon
     },
     {

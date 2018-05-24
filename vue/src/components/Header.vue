@@ -18,8 +18,8 @@
 				<div class="header-con-search fr">
 					<div id="search">
 						<form>
-							<input class="search-input" type="text" placeholder="精品女装" />
-							<input class="search-btn" type="button" value="搜索" />
+							<input id="searchInput" class="search-input" type="text" placeholder="精品女装"  @keyup.enter="searchKey"/>
+							<input class="search-btn" type="button" value="搜索" @click="searchKey" />
 						</form>
 					</div>
 					<ul class="header-con-info fr">
@@ -35,7 +35,21 @@
 
 <script>
 export default {
-	name: 'Header'
+	name: 'Header',
+	data() {
+		return {
+			keyWord: ''
+		}
+	},
+	methods: {
+		searchKey() {
+			this.$store.commit('cateState')
+			this.keyWord = document.getElementById('searchInput').value
+			if(this.keyWord != undefined && this.keyWord != '') {
+				this.$router.push({name: 'coupon', params: {n:1, c:this.keyWord}})
+			}
+		}
+	}
 }
 </script>
 

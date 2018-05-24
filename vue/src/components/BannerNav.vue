@@ -2,7 +2,7 @@
 	<div class="banner-left">
 		<ul class="banner-nav">
 			<li v-for="(item, key) in bannerNavData" :key="key">
-				<router-link :to="{name: 'coupon', params: {c:item.paramItem, n:1}}" @click.native="hideBanner">{{item.text}}</router-link>
+				<router-link :to="{name: 'coupon', params: {n:1, c:item.paramItem}}">{{item.text}}</router-link>
 			</li>
 		</ul>
 	</div>
@@ -51,9 +51,6 @@ export default {
 		}
 	},
 	methods: {
-		hideBanner () {
-			this.$store.commit('changeBannerState')
-		}
 	}
 }
 </script>
