@@ -45,7 +45,6 @@ export default {
   name: 'Index',
   data () {
 		return {
-//			cateData: null
 			cateData: [
 				"服装",
 				"化妆品",

@@ -22,7 +22,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
   color: #333;
-  min-width: 1400px;
+/*  min-width: 1400px;*/
   margin: 0;
 }
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {
@@ -43,27 +43,6 @@ address, cite, dfn, em, i, var {
 }
 h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
 input,textarea{outline:none;border: none;}
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-/*@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}*/
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
-}
 .btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
     display: table;
     content: " ";

@@ -15,7 +15,7 @@
       </div>
 		</div>
 		<div class="hot-product">
-			<div class="product-list" v-for="(item, key) in hotDataList" :key="key">
+			<div class="product-list col-md-6" v-for="(item, key) in hotDataList" :key="key">
         <a class="main-img" href="javascript:;" target="_blank" @click="toDetail(key)">
           <img :src="item.商品主图">
         </a>
