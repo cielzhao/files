@@ -1,10 +1,9 @@
 <template>
 	<nav id="nav">
 		<div class="container">
-			<!--<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="item.pageId" @click="sendMsg(key, $event)">{{item.text}}</li>-->
 			<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="key">
-				<router-link v-if="item.pageId == 0" :to="{name: 'index', params: {n:item.pageId}}">{{item.text}}</router-link>
-				<router-link v-if="item.pageId != 0" :to="{name: 'coupon', params: {c:'search', n:1}}">{{item.text}}</router-link>
+				<router-link v-if="item.pageId == 0" :to="{path: '/index', query: {n:item.pageId}}">{{item.text}}</router-link>
+				<router-link v-if="item.pageId != 0" :to="{path: '/coupon', query: {n:1, ca:0, sk:0}}">{{item.text}}</router-link>
 			</li>
 		</div>
 	</nav>
@@ -35,9 +34,10 @@ export default {
 	},
 	methods: {
 		navStyle: function() {
-			console.log(this.$route.params.n)
-			if(this.$route.params.n != undefined) {
-				var curPageId = this.$route.params.n
+			console.log(this.$route.query.n)
+			let nQuery = this.$route.query.n
+			if(nQuery != undefined) {
+				var curPageId = nQuery
 			} else {
 				var curPageId = 0
 			}

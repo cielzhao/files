@@ -66,7 +66,7 @@ export default {
 	methods: {
 		fetchData () {
 			const _this = this
-    	let apiUrl = api.curApi + "fz.php"
+    	let apiUrl = api.searchApi + "?t=0"
       axios.get(apiUrl).then(function (response) {
       	console.log(response.data)
       	_this.hotData = response.data

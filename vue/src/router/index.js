@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Index from '@/components/Index'
 import Coupon from '@/components/Coupon'
+import Search from '@/components/Search'
 import Header from '@/components/Header'
 import Nav from '@/components/Nav'
 import Banner from '@/components/Banner'
@@ -26,13 +27,18 @@ export default new Router({
     },
     {
     	name: 'index',
-      path: '/index/n/:n',
+      path: '/index',
       component: Index
     },
     {
     	name: 'coupon',
-      path: '/coupon/n/:n/c/:c',
+      path: '/coupon',
       component: Coupon
+    },
+    {
+    	name: 'search',
+      path: '/search/n/:n/c/:c',
+      component: Search
     },
     {
     	name: 'Detail',

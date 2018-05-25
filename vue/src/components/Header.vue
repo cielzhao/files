@@ -46,7 +46,7 @@ export default {
 			this.$store.commit('cateState')
 			this.keyWord = document.getElementById('searchInput').value
 			if(this.keyWord != undefined && this.keyWord != '') {
-				this.$router.push({name: 'coupon', params: {n:1, c:this.keyWord}})
+				this.$router.push({name: 'search', params: {n:1, c:this.keyWord}})
 			}
 		}
 	}

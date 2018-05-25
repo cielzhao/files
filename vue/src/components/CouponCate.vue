@@ -1,15 +1,15 @@
 <template>
-	<div class="cat-wrap main-container">
-    <div class="cat-list clearfix">
-	        <span class="cat-lit-title">商品分类</span>
+	<div class="cate-wrap main-container">
+    <div class="cate-list clearfix">
+	        <span class="cate-lit-title">商品分类</span>
 	        <ul>
-            <li class="cat-item" v-for="(item, key) in cateData" :class="{'active': item.active}" :key="key" :data-item="item.paramItem" @click.native="cateStyle">
-							<router-link :to="{name:'coupon', params: {n:1, c:item.paramItem}}">{{item.text}}<b>(6431)</b></router-link>
+            <li class="cate-item" v-for="(item, key) in cateData" :key="key" :data-item="key" @click="navStyle($event)">
+  						<router-link :to="{path:'/coupon', query: {n:1, ca:key, sk:0}}">{{item}}</router-link>
 						</li>
          </ul>
 	    </div>
 
-	    <div class="cat-list sale-type clearfix">
+	    <!--<div class="cat-list sale-type clearfix">
 	        <span class="cat-lit-title">促销类型</span>
 	        <ul>
 	            <li class="">
@@ -31,128 +31,74 @@
 	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;video=1"><span class="theme-span">视频商品</span></a>
 	            </li>
 	        </ul>
-	    </div>
+	    </div>-->
 
 	</div>
 </template>
 
 <script>
+import axios from 'axios'
+import api from '../api/api.js'
 import CouponLive from './CouponLive'
 
 export default {
   name: 'Index',
   data () {
 		return {
+//			cateData: null
 			cateData: [
-			  {
-	      	text: '全部优惠',
-	      	active: true,
-	      	paramItem: 'search'
-	      },
-	      {
-	      	text: '女装',
-	      	active: false,
-	      	paramItem: 'fz'
-	      },
-	      {
-	      	text: '男装',
-	      	active: false,
-	      	paramItem: 'nz'
-	      },
-				{
-	      	text: '内衣',
-	      	active: false,
-	      	paramItem: 'ny'
-	      },
-	      {
-	      	text: '母婴',
-	      	active: false,
-	      	paramItem: 'my'
-	      },
-	      {
-	      	text: '化妆',
-	      	active: false,
-	      	paramItem: 'hz'
-	      },
-	      {
-	      	text: '居家日用',
-	      	active: false,
-	      	paramItem: 'jjry'
-	      },
-	      {
-	      	text: '鞋包配饰',
-	      	active: false,
-	      	paramItem: 'xbps'
-	      },
-	      {
-	      	text: '美食',
-	      	active: false,
-	      	paramItem: 'ms'
-	      },
-	      {
-	      	text: '文体车品',
-	      	active: false,
-	      	paramItem: 'wtcp'
-	      },
-	      {
-	      	text: '数码家电',
-	      	active: false,
-	      	paramItem: 'smjd'
-	      }
+				"服装",
+				"化妆品",
+				"居家日用",
+				"美食",
+				"母婴",
+				"数码家电",
+				"文体车品",
+				"鞋包配饰"
 			]
 		}
 	},
   components: {
     'CouponLive': CouponLive,
   },
-	mounted () {
-		this.cateStyle()
-	},
+  mounted() {
+  	this.navStyle()
+  },
   methods:{
-  	cateStyle: function() {
-  		let cParam = this.$route.params.c
-  		console.log(cParam)
-  		let oNavItem = document.querySelectorAll('.cat-item')
-			for(let i = 0; i < oNavItem.length; i++) {
-				oNavItem[i].classList.remove("active")
+		navStyle ($event) {
+			let caQuery = this.$route.query.ca
+			if(caQuery != undefined) {
+				var cateIndex = caQuery
+			} else {
+				var cateIndex = 0
 			}
 
-			if(cParam == 'fz') {
-				oNavItem[1].classList.add('active')
-			} else {
-				for(let i = 0; i < oNavItem.length; i++) {
-					oNavItem[i].classList.remove("active")
-					let dataItem = oNavItem[i].getAttribute('data-item')
-					if(dataItem == cParam) {
-						oNavItem[i].classList.add('active')
-					}
-				}
+			let cateItem = document.querySelectorAll('.cate-item')
+			let cateLength = cateItem.length
+			for(let i = 0; i < cateLength; i++) {
+				cateItem[i].classList.remove("active")
 			}
+			cateItem[cateIndex].classList.add("active")
 		}
-  },
-  watch: {
-    '$route' (to, from) {
-      this.cateStyle()
-    }
   }
 }
 </script>
 
 <style>
-.cat-wrap {
+.cate-wrap {
     width: 1198px;
     border: 1px solid #eee;
     border-bottom: none;
     margin-bottom: 15px
 }
 
-.cat-wrap .cat-list {
+.cate-wrap .cate-list {
     background: #f9f9f9;
     display: block;
     border-bottom: #eee 1px solid
 }
 
-.cat-wrap .cat-list .cat-lit-title {
+.cate-wrap .cate-list .cate-lit-title {
     float: left;
     width: 100px;
     line-height: 50px;
@@ -160,7 +106,7 @@ export default {
     text-align: center
 }
 
-.cat-wrap .cat-list ul {
+.cate-wrap .cate-list ul {
     background: #fff;
     list-style: none;
     float: left;
@@ -169,35 +115,35 @@ export default {
     width: 1068px
 }
 
-.cat-wrap .cat-list ul li {
+.cate-wrap .cate-list ul li {
     list-style: none;
     float: left;
     margin-right: 17px
 }
 
-.cat-wrap .cat-list ul li:last-child,.goods-list ul .no-right {
+.cate-wrap .cate-list ul li:last-child,.goods-list ul .no-right {
     margin-right: 0
 }
 
-.cat-wrap .cat-list ul li a b {
+.cate-wrap .cate-list ul li a b {
     font-family: Arial;
     font-weight: 400;
     color: #999;
     margin-left: 6px
 }
-.cat-wrap .cat-list ul li a, .cat-wrap .cat-list ul li a.link {
+.cate-wrap .cate-list ul li a, .cate-wrap .cate-list ul li a.link {
 	color: #333;
 }
 
-.cat-wrap .sale-type ul li {
+.cate-wrap .sale-type ul li {
     margin-right: 30px
 }
 
-.cat-wrap .sale-type ul li a {
+.cate-wrap .sale-type ul li a {
     padding-left: 18px
 }
 
-.cat-wrap .sale-type ul li i {
+.cate-wrap .sale-type ul li i {
     position: absolute;
     width: 10px;
     height: 10px;
@@ -206,7 +152,7 @@ export default {
     top: 0
 }
 
-.cat-wrap .sale-type ul li.cat-lit-video span {
+.cate-wrap .sale-type ul li.cate-lit-video span {
     text-indent: 8px;
     padding: 1px 3px 1px 12px;
     margin-left: 0;
@@ -216,7 +162,7 @@ export default {
     position: relative
 }
 
-.cat-wrap .sale-type ul li.cat-lit-video span:before {
+.cate-wrap .sale-type ul li.cate-lit-video span:before {
     content: '';
     position: absolute;
     left: 4px;
@@ -229,44 +175,38 @@ export default {
     border-right: 5px solid transparent
 }
 
-.cat-wrap .sale-type ul .active a i,.cat-wrap .sale-type ul li a:focus i,.cat-wrap .sale-type ul li a:hover i {
+.cate-wrap .sale-type ul .active a i,.cate-wrap .sale-type ul li a:focus i,.cate-wrap .sale-type ul li a:hover i {
     border: 1px solid #ff6255
 }
 
-.cat-wrap .sale-type ul .active a i {
+.cate-wrap .sale-type ul .active a i {
     background: url(../assets/images/index/cms_pc_img.png?v=20184103648381) -99px -80px no-repeat #ff6255
 }
-
-.cat-wrap .cat-list ul .active .router-link-active,
-.cat-wrap .cat-list ul .active .router-link-active b,
-.cat-wrap .cat-list ul li a:focus,
-.cat-wrap .cat-list ul li a:focus b,
-.cat-wrap .cat-list ul li a:hover,
-.cat-wrap .cat-list ul li a:hover b {
-    color: #ff6255
+.cate-wrap .cate-list ul li.cate-item.active a,
+.cate-wrap .cate-list ul li .router-link-exact-active.router-link-active {
+	color: #ff6255
 }
-
-.cat-wrap .sort-wrap {
+.cate-wrap .sort-wrap {
     position: absolute;
     top: 0;
     right: 0
 }
 
-.cat-wrap .sort-wrap .sort-text {
+.cate-wrap .sort-wrap .sort-text {
     font-size: 12px;
     color: #666
 }
 
-.cat-wrap .sort-wrap a {
+.cate-wrap .sort-wrap a {
     font-size: 12px;
     color: #5fa1ca
 }
 
-.cat-wrap .sort-wrap a.active,.cat-wrap .sort-wrap a:focus,.cat-wrap .sort-wrap a:hover {
+.cate-wrap .sort-wrap a.active,.cate-wrap .sort-wrap a:focus,.cate-wrap .sort-wrap a:hover {
     color: red
 }
 
-.cat-wrap .sort-wrap a.margin {
+.cate-wrap .sort-wrap a.margin {
     margin-left: 10px
 }
 

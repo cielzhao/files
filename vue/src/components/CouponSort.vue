@@ -1,10 +1,8 @@
 <template>
 	<div class="tag-wrap main-container clearfix cat-wrap">
     <div class="fixed-wrap fl theme-a-hover-active-border-top-1">
-      <a href="javascript:;" class="tag-fixed active">人气</a>
-      <a href="javascript:;" class="tag-fixed ">最新</a>
-      <a href="javascript:;" class="tag-fixed ">销量</a>
-      <a href="javascript:;" class="tag-fixed ">价格</a>
+      <a href="javascript:;" v-for="(item, key) in sortNav" :key="key" :data-index="item.index" class="tag-fixed" @click="sortBy(item.param, $event)">{{item.text}}</a>
+
       <div class="sort-price-area fl">
         <form action="">
             <input type="hidden" name="cid" value="0">
@@ -18,26 +16,63 @@
         </form>
       </div>
     </div>
-    <div class="goods-pages-page clearfix" style="">
+    <!--<div class="goods-pages-page clearfix" style="">
 			<span class="pagebtn disabled pre-page"></span>
       <span class="page-num"><b>1</b>/666</span>
       <span class="pagebtn next-page"><a href="javascript:;"></a></span>
-    </div>
+    </div>-->
 	</div>
 </template>
 
 <script>
-import CouponLive from './CouponLive'
 
 export default {
   name: 'Index',
-  components: {
-    'CouponLive': CouponLive,
+  data () {
+  	return {
+  		sortNav: [
+  			{
+  				'text': '人气',
+  				'param': 3,
+  				'index': 0
+  			},
+  			{
+  				'text': '最新',
+  				'param': 2,
+  				'index': 1
+  			},
+  			{
+  				'text': '销量',
+  				'param': 1,
+  				'index': 2
+  			},
+  			{
+  				'text': '价格',
+  				'param': 0,
+  				'index': 3
+  			},
+  		]
+  	}
   },
-  computed:{
-
+  mounted () {
+  	this.defaultStyle()
   },
   methods:{
+  	sortBy (itemParam, $event) {
+  		let caQuery = this.$route.query.ca
+			this.$router.push({name: 'coupon', query: {n:1, ca:caQuery, sk:itemParam}})
+
+			let cateItem = $event.target.parentNode.children
+			let cateItemLength = cateItem.length
+			for(let i = 0; i < cateItemLength; i++) {
+				cateItem[i].classList.remove('active')
+			}
+			$event.target.classList.add('active')
+  	},
+  	defaultStyle () {
+			let oNavItem = document.querySelectorAll('.tag-fixed')
+			oNavItem[0].classList.add("active")
+		}
   }
 }
 </script>

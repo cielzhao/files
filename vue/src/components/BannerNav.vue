@@ -2,55 +2,36 @@
 	<div class="banner-left">
 		<ul class="banner-nav">
 			<li v-for="(item, key) in bannerNavData" :key="key">
-				<router-link :to="{name: 'coupon', params: {n:1, c:item.paramItem}}">{{item.text}}</router-link>
+				<router-link :to="{path: '/coupon', query: {n:1, ca:key, sk:0}}">{{item}}</router-link>
 			</li>
 		</ul>
 	</div>
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import axios from 'axios'
+import api from '../api/api.js'
+
 export default {
 	name: 'BannerNav',
 	data () {
 		return {
-			bannerNavData: [
-				{
-	      	text: '服装',
-	      	paramItem: 'fz'
-	      },
-	      {
-	      	text: '母婴',
-	      	paramItem: 'my'
-	      },
-	      {
-	      	text: '化妆',
-	      	paramItem: 'hz'
-	      },
-	      {
-	      	text: '居家日用',
-	      	paramItem: 'jjry'
-	      },
-	      {
-	      	text: '鞋包配饰',
-	      	paramItem: 'xbps'
-	      },
-	      {
-	      	text: '美食',
-	      	paramItem: 'ms'
-	      },
-	      {
-	      	text: '文体车品',
-	      	paramItem: 'wtcp'
-	      },
-	      {
-	      	text: '数码家电',
-	      	paramItem: 'smjd'
-	      }
-			]
+			bannerNavData: null
 		}
 	},
+	created() {
+		this.fetchData()
+	},
 	methods: {
+		fetchData() {
+			const _this = this
+    	let apiUrl = api.cateApi
+      axios.get(apiUrl).then(function (response) {
+      	_this.bannerNavData = response.data
+      }).catch((error) => {
+        console.log(error)
+      })
+		}
 	}
 }
 </script>
