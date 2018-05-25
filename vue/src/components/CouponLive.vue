@@ -18,10 +18,10 @@
 	          </a>
 	          <div class="goods-padding">
 	            <div class="coupon-wrap clearfix">
-	              <span class="price" v-if="item.优惠券面额.indexOf('减')!=-1"><b><i>￥</i>{{item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)}}</b>券后价</span>
-	              <span class="price" v-else="item.优惠券面额.indexOf('减')==-1"><b><i>￥</i>{{item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</b>券后价</span>
-	              <span class="coupon" v-if="item.优惠券面额.indexOf('减')!=-1">券<b><i>￥</i>{{item.商品价格 - item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)}}</b></span>
-	              <span class="coupon" v-else="item.优惠券面额.indexOf('减')==-1">券<b><i>￥</i>{{item.商品价格 - item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</b></span>
+	              <span class="price" v-if="item.优惠券面额.indexOf('减')!=-1"><b><i>￥</i>{{item.商品价格 - item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)}}</b>券后价</span>
+	              <span class="price" v-else="item.优惠券面额.indexOf('减')==-1"><b><i>￥</i>{{item.商品价格 - item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</b>券后价</span>
+	              <span class="coupon" v-if="item.优惠券面额.indexOf('减')!=-1">券<b><i>￥</i>{{item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)}}</b></span>
+	              <span class="coupon" v-else="item.优惠券面额.indexOf('减')==-1">券<b><i>￥</i>{{item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</b></span>
 	            </div>
 	            <div class="title">
 	              <a href="javascript:;">{{item.商品名称}}</a>
