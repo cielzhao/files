@@ -1,38 +1,13 @@
 <template>
 	<div class="cate-wrap main-container">
     <div class="cate-list clearfix">
-	        <span class="cate-lit-title">商品分类</span>
-	        <ul>
-            <li class="cate-item" v-for="(item, key) in cateData" :key="key" :data-item="key" @click="navStyle($event)">
-  						<router-link :to="{path:'/coupon', query: {n:1, ca:key, sk:0}}">{{item}}</router-link>
-						</li>
-         </ul>
-	    </div>
-
-	    <!--<div class="cat-list sale-type clearfix">
-	        <span class="cat-lit-title">促销类型</span>
-	        <ul>
-	            <li class="">
-	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;seckill=1">秒杀活动</a>
-	            </li>
-	            <li class="">
-	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;jipin=1">优选</a>
-	            </li>
-	            <li class="">
-	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;tmall=1">天猫</a>
-	            </li>
-	            <li class="">
-	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;freight=1">运费险</a>
-	            </li>
-	            <li class="">
-	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;amoy=1">海淘</a>
-	            </li>
-	            <li class="cat-lit-video ">
-	                <a href="/index.php?r=l&amp;cid=0&amp;s=t&amp;video=1"><span class="theme-span">视频商品</span></a>
-	            </li>
-	        </ul>
-	    </div>-->
-
+      <span class="cate-lit-title">商品分类</span>
+      <ul>
+        <li class="cate-item" v-for="(item, key) in cateData" :key="key" :data-item="key" @click="navStyle($event)">
+					<router-link :to="{path:'/coupon', query: {n:1, ca:key, sk:0}}">{{item}}</router-link>
+				</li>
+      </ul>
+	 	</div>
 	</div>
 </template>
 
@@ -45,25 +20,28 @@ export default {
   name: 'Index',
   data () {
 		return {
-			cateData: [
-				"服装",
-				"化妆品",
-				"居家日用",
-				"美食",
-				"母婴",
-				"数码家电",
-				"文体车品",
-				"鞋包配饰"
-			]
+			cateData: null
 		}
 	},
   components: {
     'CouponLive': CouponLive,
   },
-  mounted() {
+	created() {
+		this.fetchData()
+	},
+  nextTick() {
   	this.navStyle()
   },
   methods:{
+  	fetchData() {
+			const _this = this
+    	let apiUrl = api.cateApi
+      axios.get(apiUrl).then(function (response) {
+      	_this.cateData = response.data
+      }).catch((error) => {
+        console.log(error)
+      })
+		},
 		navStyle ($event) {
 			let caQuery = this.$route.query.ca
 			if(caQuery != undefined) {
