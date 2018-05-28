@@ -1,9 +1,11 @@
 <template>
 	<div id="main">
 		<div class="container">
-			<div class="divider">亲爱的，欢迎每天来选购超值优惠商品哦~每天都会准时更新</div>
-			<div class="coupon">
-				<CouponHot></CouponHot>
+			<div class="row">
+				<div class="divider">亲爱的，欢迎每天来选购超值优惠商品哦~每天都会准时更新</div>
+				<div class="coupon">
+					<CouponHot></CouponHot>
+				</div>
 			</div>
 		</div>
 	</div>

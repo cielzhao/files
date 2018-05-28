@@ -22,7 +22,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
   color: #333;
-/*  min-width: 1400px;*/
+  min-width: 320px;
   margin: 0;
 }
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {

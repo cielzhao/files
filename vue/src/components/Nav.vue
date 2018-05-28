@@ -1,10 +1,12 @@
 <template>
 	<nav id="nav">
 		<div class="container">
-			<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="key">
-				<router-link v-if="item.pageId == 0" :to="{path: '/index', query: {n:item.pageId}}">{{item.text}}</router-link>
-				<router-link v-if="item.pageId != 0" :to="{path: '/coupon', query: {n:1, ca:0, sk:0}}">{{item.text}}</router-link>
-			</li>
+			<div class="row">
+				<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="key">
+					<router-link v-if="item.pageId == 0" :to="{path: '/index', query: {n:item.pageId}}">{{item.text}}</router-link>
+					<router-link v-if="item.pageId != 0" :to="{path: '/coupon', query: {n:1, ca:0, sk:0}}">{{item.text}}</router-link>
+				</li>
+			</div>
 		</div>
 	</nav>
 </template>
@@ -17,7 +19,7 @@ export default {
 			navData:
 			[
 	      {
-	      	text: '今日上新',
+	      	text: '今日新品',
 	      	active: true,
 	      	pageId: 0
 	      },

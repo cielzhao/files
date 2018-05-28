@@ -28,5 +28,15 @@ export default {
 </script>
 
 <style>
-
+@media only screen and (max-width: 575px) {
+	.container {
+		width: 100%;
+	}
+	.header-top,
+	.header-con-logo,
+	.header-con-info,
+	.banner-right {
+		display: none;
+	}
+}
 </style>

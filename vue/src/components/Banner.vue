@@ -1,9 +1,11 @@
 <template>
 	<div id="banner" v-if="curBannerState">
 		<div class="container">
-			<BannerNav></BannerNav>
-			<BannerSwiper></BannerSwiper>
-			<BannerShare></BannerShare>
+			<div class="row">
+				<BannerNav></BannerNav>
+				<BannerSwiper></BannerSwiper>
+				<BannerShare></BannerShare>
+			</div>
 		</div>
 	</div>
 </template>
@@ -40,5 +42,8 @@ export default {
 </script>
 
 <style>
-
+.col-md-2, .col-md-8 {
+	padding-left: 0;
+	padding-right: 0;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="banner-left">
+	<div class="banner-left col-md-2 col-sm-12">
 		<ul class="banner-nav">
 			<li v-for="(item, key) in bannerNavData" :key="key">
 				<router-link :to="{path: '/coupon', query: {n:1, ca:key, sk:0}}">{{item}}</router-link>
@@ -37,12 +37,8 @@ export default {
 </script>
 
 <style>
-#banner .container > div {
-	float: left;
-	height: 300px;
-}
 #banner .banner-left {
-	width: 180px;
+	height: 300px;
 	background-color: #fbeaf4;
 }
 #banner .banner-nav {

@@ -1,5 +1,5 @@
 <template>
-	<div class="banner-right">
+	<div class="banner-right col-md-2">
 		<div class="share">
 			<div class="bdsharebuttonbox" data-tag="share_1">
 				<a href="#" class="bds_more" data-cmd="more"></a>
@@ -9,8 +9,6 @@
 		    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
 			</div>
 		</div>
-		<a class="snatch" href="javascript:;"></a>
-		<img src="../assets/images/index/banner-share.jpg"/>
 	</div>
 </template>
 
@@ -41,12 +39,13 @@ export default {
 <style>
 #banner .banner-right {
 	position: relative;
-	width: 240px;
+	height: 300px;
+	background-color: #fbeaf4;
 }
 #banner .share {
 	position: absolute;
-  top: 95px;
-  left: 48px;
+  top: 40%;
+  left: 20px;
 }
 #banner .snatch {
 	position: absolute;

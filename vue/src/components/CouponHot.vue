@@ -15,7 +15,7 @@
       </div>
 		</div>
 		<div class="hot-product">
-			<div class="product-list col-md-6" v-for="(item, key) in hotDataList" :key="key">
+			<div class="product-list col-md-6 col-sm-12" v-for="(item, key) in hotDataList" :key="key">
         <a class="main-img" href="javascript:;" target="_blank" @click="toDetail(key)">
           <img :src="item.商品主图">
         </a>
@@ -95,9 +95,6 @@ export default {
   border: 1px solid #eee;
   background-color: #fffcfd;
 }
-.product-list:nth-child(2n) {
-	float: right;
-}
 .product-list:hover {
 	border-color: red;
 }
@@ -107,8 +104,8 @@ export default {
 	border: 0;
 }
 .product-intro {
-	width: 240px;
-    margin: 26px 0 26px 20px;
+	width: 210px;
+  margin: 26px 0 26px 20px;
 }
 .product-title {
 	font-size: 15px;
@@ -230,4 +227,30 @@ export default {
 	color: #f61d5a;
     display: block;
 }
+@media only screen and (min-width: 576px) and (max-width: 1024px) {
+	.product-list {
+		height: auto;
+	}
+	.product-intro.fr {
+		float: none;
+	}
+}
+@media only screen and (max-width: 575px) {
+	#main .divider {
+		font-size: 12px;
+	}
+	.hot-head-right {
+		display: none;
+	}
+	.product-list {
+		width: 100%;
+		height: auto;
+		border: none;
+		border-bottom: 1px solid #ddd;
+	}
+	.product-intro.fr {
+		float: none;
+	}
+}
+
 </style>
