@@ -1,7 +1,7 @@
 <template>
 	<div id="main">
 		<div class="container">
-			<div class="divider">亲爱的，欢迎每天来选购超值优惠商品哦~每天都会准时更新</div>
+			<div class="divider">亲爱的，欢迎每天来选购超值优惠商品哦~</div>
 			<div class="detail">
 				<div class="detail-img">
 					<a rel="nofollow" :href="curDetail.商品详情页链接地址" target="_blank" class="img" :data-id="curDetail.商品id">
@@ -216,7 +216,6 @@ export default {
 }
 
 .detail .detail-info .coupon-wrap {
-    height: 30px;
     line-height: 30px;
     margin: 30px auto 20px;
     padding: 20px;
@@ -257,7 +256,7 @@ export default {
 }
 
 .detail .detail-info .text-wrap {
-    height: 16px;
+    height: 36px;
     line-height: 16px;
     padding: 10px 0;
     border-top: 1px dotted #C9C9C9;
@@ -490,7 +489,6 @@ export default {
 }
 .buy-time span {
 	display: inline-block;
-	height: 16px;
   line-height: 16px;
   padding: 10px 0;
   font-size: 12px;

@@ -30,7 +30,7 @@
             </div>
             <div class="residue">优惠券总数<i>{{item.优惠券总量}}</i>张，剩余<i>{{item.优惠券剩余量}}</i>张</div>
             <div class="buy">
-                <div class="buy-price" v-if="item.优惠券面额.indexOf('减')!=-1">{{item.商品价格 - item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)}}</div>
+                <div class="buy-price" v-if="item.优惠券面额.indexOf('减')!=-1">{{(item.商品价格 - item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)).toFixed(2)}}</div>
                 <div class="buy-price" v-else="item.优惠券面额.indexOf('减')==-1">{{item.商品价格 - item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</div>
                 <div class="old-price">
                     <p><i>￥</i>{{item.商品价格}}</p>
@@ -162,7 +162,7 @@ export default {
 	background-color: #FF435E;
     color: #fff;
     font-size: 15px;
-    margin-top: 35px;
+    margin-top: 32px;
     width: 100%;
     height: 50px;
     line-height: 50px;
@@ -170,7 +170,7 @@ export default {
     display: block;
 }
 .buy .buy-price {
-	font: 30px Arial;
+	font: 24px Arial;
   font-weight: 700;
   padding-top: 10px;
   padding-left: 5px;
@@ -199,17 +199,16 @@ export default {
 }
 .buy .go-buy {
 	position: absolute;
-    right: 0;
-    background: #fef490;
-    background: -webkit-gradient(linear,0 0,right 0,from(#fef490),to(#fee44d));
-    background: -moz-linear-gradient(left,#fef490,#fee44d);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#fef490, endColorstr=#fee44d);
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=1, startColorstr=#fef490, endColorstr=#fee44d)";
-    background: -o-linear-gradient(left,#fef490,#fee44d);
-    width: 80px;
-    font-size: 16px;
-    text-align: center;
-    font-family: "Microsoft Yahei";
+  right: 0;
+  background: #fef490;
+  background: -webkit-gradient(linear,0 0,right 0,from(#fef490),to(#fee44d));
+  background: -moz-linear-gradient(left,#fef490,#fee44d);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#fef490, endColorstr=#fee44d);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=1, startColorstr=#fef490, endColorstr=#fee44d)";
+  background: -o-linear-gradient(left,#fef490,#fee44d);
+  width: 60px;
+  font-size: 16px;
+  text-align: center;
 }
 .buy .go-buy a:before {
 	position: absolute;
@@ -233,11 +232,15 @@ export default {
 	}
 	.product-intro.fr {
 		float: none;
+		width: 80%;
 	}
 }
 @media only screen and (max-width: 575px) {
 	#main .divider {
 		font-size: 12px;
+	}
+	.hot-head-left {
+		padding-left: 20px;
 	}
 	.hot-head-right {
 		display: none;
@@ -248,8 +251,21 @@ export default {
 		border: none;
 		border-bottom: 1px solid #ddd;
 	}
+	.main-img {
+		margin-left: 20px;
+	}
+	.product-intro {
+		width: 100%;
+		margin: 0;
+		padding: 10px;
+	}
 	.product-intro.fr {
 		float: none;
+	}
+	.col-md-6,
+	.col-sm-12 {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 

@@ -85,7 +85,6 @@ export default {
 
 <style>
 .cate-wrap {
-    width: 1198px;
     border: 1px solid #eee;
     border-bottom: none;
     margin-bottom: 15px
@@ -108,10 +107,8 @@ export default {
 .cate-wrap .cate-list ul {
     background: #fff;
     list-style: none;
-    float: left;
-    padding: 10px 0 10px 30px;
+    padding: 10px 0 10px 20px;
     line-height: 30px;
-    width: 1068px
 }
 
 .cate-wrap .cate-list ul li {
@@ -213,9 +210,18 @@ export default {
     background-color: #f9f9f9;
     height: 38px;
     margin-bottom: 20px;
-    width: 1198px;
     line-height: 38px;
     position: relative;
     border: 1px solid #eee
+}
+@media only screen and (max-width: 575px) {
+	.cate-wrap .cate-list .cate-lit-title {
+		float: none;
+    line-height: 30px;
+    margin-left: 10px;
+	}
+	.cate-wrap .cate-list ul {
+    padding: 0 0 10px 10px;
+	}
 }
 </style>

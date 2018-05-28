@@ -4,8 +4,8 @@
 			<div class="container">
 				<div class="header-top-left fl">每天千款优惠券、只为专注精选！</div>
 				<ul class="header-top-right fr">
-					<li><a class="set-home" href="javascript:;" title="将本站设为首页">设为首页</a></li>
-					<li><a class="add-favorite" href="javascript:;" title="加入收藏，方便下次打开">加入收藏</a></li>
+					<li><a class="set-home" href="javascript:;" title="将本站设为首页" @click="SetHome(this,myUrl)">设为首页</a></li>
+					<li><a class="add-favorite" href="javascript:;" title="加入收藏，方便下次打开" @click="AddFavorite('精品女装',myUrl)">加入收藏</a></li>
 					<!--<li><a class="my-service" href="javascript:;" title="联系我帮你解答">遇到购物问题? 联系我 ></a></li>-->
 				</ul>
 			</div>
@@ -43,8 +43,12 @@ export default {
 	name: 'Header',
 	data() {
 		return {
-			keyWord: ''
+			keyWord: '',
+			myUrl: ''
 		}
+	},
+	created() {
+		this.myUrl = window.location
 	},
 	methods: {
 		searchKey() {
@@ -53,6 +57,33 @@ export default {
 			if(this.keyWord != undefined && this.keyWord != '') {
 				this.$router.push({name: 'search', params: {n:1, c:this.keyWord}})
 			}
+		},
+		SetHome(obj,url){
+		  try{
+		    obj.style.behavior='url(#default#homepage)';
+		    obj.setHomePage(url);
+		  }catch(e){
+		    if(window.netscape){
+		     try{
+		       netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+		     }catch(e){
+		       alert("抱歉，此操作被浏览器拒绝！\n\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'");
+		     }
+		    }else{
+		    alert("抱歉，您所使用的浏览器无法完成此操作。\n\n您需要手动将【"+url+"】设置为首页。");
+		    }
+		  }
+		},
+		AddFavorite(sURL, sTitle) {
+		  try {
+        window.external.addFavorite(sURL, sTitle);
+	    } catch (e) {
+	        try {
+	            window.sidebar.addPanel(sTitle, sURL, "");
+	        } catch (e) {
+	            alert("加入收藏失败，请使用Ctrl+D进行添加");
+	        }
+	    }
 		}
 	}
 }
@@ -78,17 +109,13 @@ export default {
 	color: #8da7cb;
 }
 .header-con-logo {
-	width: 30%;
   height: 80px;
 }
 .header-con-logo a {
     line-height: 80px;
-    font-size: 36px;
+    font-size: 34px;
     padding-left: 20px;
     color: #ff6eb4;
-}
-.header-con-search {
-  width: 70%;
 }
 
 #search {

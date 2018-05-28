@@ -11,8 +11,8 @@
             <input class="min-price" name="jgqj1" value="" placeholder="￥">
             <span>-</span>
             <input class="max-price" name="jgqj2" value="" placeholder="￥">
-            <button class="theme-bg-color-1 theme-hover-bg-color-3">确定</button>
-            <a class="clear-price" href="javascript:;">清除</a>
+            <button>确定</button>
+            <button>清除</button>
         </form>
       </div>
     </div>
@@ -78,14 +78,6 @@ export default {
 </script>
 
 <style>
-.tag-wrap .fixed-wrap {
-    float: left;
-    position: absolute;
-    left: 0;
-    top: -1px;
-    max-width: 1108px
-}
-
 .tag-wrap .fixed-wrap .tag-fixed {
     float: left;
     line-height: 40px;
@@ -109,8 +101,7 @@ export default {
 }
 
 .tag-wrap .fixed-wrap .sort-price-area {
-    width: 180px;
-    margin-left: 20px;
+    width: auto;
     padding: 7px 10px;
     margin-top: 1px;
     position: relative
@@ -121,7 +112,7 @@ export default {
     box-shadow: 0 0 6px 0 rgba(170,170,170,.3)
 }
 
-.tag-wrap .fixed-wrap .sort-price-area a.clear-price {
+/*.tag-wrap .fixed-wrap .sort-price-area a.clear-price {
     display: none;
     position: absolute;
     right: 14px;
@@ -136,10 +127,9 @@ export default {
 
 .tag-wrap .fixed-wrap .sort-price-area a:hover.clear-price {
     text-decoration: underline
-}
+}*/
 
 .tag-wrap .fixed-wrap .sort-price-area button {
-    display: none;
     width: 40px;
     height: 24px;
     border-radius: 4px;
@@ -166,8 +156,8 @@ export default {
 }
 
 .tag-wrap .fixed-wrap .sort-price-area input {
-    width: 30px;
-    height: 14px;
+    width: 40px;
+    height: 24px;
     padding: 4px;
     float: left;
     color: #999;
@@ -206,5 +196,10 @@ export default {
 
 .tag-wrap .tags .active,.tag-wrap .tags a:focus,.tag-wrap .tags a:hover {
     color: red
+}
+@media only screen and (max-width: 575px) {
+	.tag-wrap .fixed-wrap .tag-fixed {
+		padding: 0 5px;
+	}
 }
 </style>
