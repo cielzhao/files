@@ -1,7 +1,7 @@
 <template>
 	<div class="banner-left col-md-2 col-sm-12">
 		<ul class="banner-nav">
-			<li v-for="(item, key) in bannerNavData" :key="key">
+			<li v-for="(item, key) in bannerNavData" :key="key" @click='bannerNavClick(key)'>
 				<router-link :to="{path: '/coupon', query: {n:1, ca:key, st:0, q:item}}">{{item}}</router-link>
 			</li>
 		</ul>
@@ -28,9 +28,14 @@ export default {
     	let apiUrl = api.cateApi
       axios.get(apiUrl).then(function (response) {
       	_this.bannerNavData = response.data
+
       }).catch((error) => {
         console.log(error)
       })
+		},
+		bannerNavClick(key) {
+			let keyWord = this.bannerNavData(key)
+			window.localStorage.setItem('keyWord', keyWord)
 		}
 	}
 }
