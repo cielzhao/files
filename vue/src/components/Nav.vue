@@ -4,7 +4,7 @@
 			<div class="row">
 				<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="key">
 					<router-link v-if="item.pageId == 0" :to="{path: '/index', query: {n:item.pageId}}">{{item.text}}</router-link>
-					<router-link v-if="item.pageId != 0" :to="{path: '/coupon', query: {n:1, ca:0, sk:0}}">{{item.text}}</router-link>
+					<router-link v-if="item.pageId != 0" :to="{path: '/coupon', query: {n:1, ca:0, st:0, q:keyWord}}">{{item.text}}</router-link>
 				</li>
 			</div>
 		</div>
@@ -12,6 +12,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+import api from '../api/api.js'
+
 export default {
 	name: 'Nav',
 	data () {
@@ -28,17 +31,29 @@ export default {
 	      	active: false,
 	      	pageId: 1
 	      }
-	    ]
+	    ],
+	    keyWord: ''
 		}
+	},
+	created() {
+		this.fetchData()
 	},
 	mounted () {
 		this.navStyle()
 	},
 	methods: {
-		navStyle: function() {
-			console.log(this.$route.query.n)
+		fetchData() {
+			const _this = this
+    	let apiUrl = api.cateApi
+      axios.get(apiUrl).then(function (response) {
+      	_this.keyWord = response.data[0]
+      }).catch((error) => {
+        console.log(error)
+      })
+		},
+		navStyle () {
 			let nQuery = this.$route.query.n
-			if(nQuery != undefined) {
+			if(nQuery) {
 				var curPageId = nQuery
 			} else {
 				var curPageId = 0

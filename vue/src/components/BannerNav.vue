@@ -2,7 +2,7 @@
 	<div class="banner-left col-md-2 col-sm-12">
 		<ul class="banner-nav">
 			<li v-for="(item, key) in bannerNavData" :key="key">
-				<router-link :to="{path: '/coupon', query: {n:1, ca:key, sk:0}}">{{item}}</router-link>
+				<router-link :to="{path: '/coupon', query: {n:1, ca:key, st:0, q:item}}">{{item}}</router-link>
 			</li>
 		</ul>
 	</div>
@@ -60,4 +60,11 @@ export default {
 #banner a,#banner a:link,#banner a:visited,#banner a:hover,#banner a:focus,#banner a:active {
 	color: #333;
 }
+@media only screen and (max-width: 575px) {
+	#banner .banner-left {
+    display: none;
+	}
+}
+
+
 </style>

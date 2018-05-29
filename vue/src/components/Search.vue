@@ -4,7 +4,7 @@
 		<Nav></Nav>
 		<div id="main">
 			<div class="container">
-				<CouponSort></CouponSort>
+				<CouponSort1></CouponSort1>
 				<CouponLive></CouponLive>
 			</div>
 		</div>
@@ -15,7 +15,7 @@
 <script>
 import Header from './Header'
 import Nav from './Nav'
-import CouponSort from './CouponSort'
+import CouponSort1 from './CouponSort1'
 import CouponLive from './CouponLive'
 import Footer from './Footer'
 
@@ -24,7 +24,7 @@ export default {
   components: {
     'Header': Header,
     'Nav': Nav,
-    'CouponSort': CouponSort,
+    'CouponSort1': CouponSort1,
     'CouponLive': CouponLive,
     'Footer': Footer,
   },

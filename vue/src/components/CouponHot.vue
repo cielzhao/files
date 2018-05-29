@@ -24,14 +24,12 @@
                 <a  href="javascript:;" target="_blank" :title="item.title" >{{item.商品名称}}</a>
             </p>
             <div class="product-price">
-                <span v-if="item.优惠券面额.indexOf('减')!=-1">券<b><i>￥</i>{{item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)}}</b></span>
-                <span v-else="item.优惠券面额.indexOf('减')==-1">券<b><i>￥</i>{{item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</b></span>
+                <span>券<b><i>￥</i>{{couponVal(item.优惠券面额)}}</b></span>
                 <div class="shop">店铺名称：{{item.店铺名称}}</div>
             </div>
             <div class="residue">优惠券总数<i>{{item.优惠券总量}}</i>张，剩余<i>{{item.优惠券剩余量}}</i>张</div>
             <div class="buy">
-                <div class="buy-price" v-if="item.优惠券面额.indexOf('减')!=-1">{{(item.商品价格 - item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)).toFixed(2)}}</div>
-                <div class="buy-price" v-else="item.优惠券面额.indexOf('减')==-1">{{item.商品价格 - item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</div>
+                <div class="buy-price">{{newPrice(item.商品价格, item.优惠券面额)}}</div>
                 <div class="old-price">
                     <p><i>￥</i>{{item.商品价格}}</p>
                     <span>券后价</span>
@@ -57,7 +55,6 @@ export default {
 			hotData: null,
 			hotDataList: null,
 			requestId: '',
-			pageId: 0
 		}
 	},
   created() {
@@ -81,7 +78,24 @@ export default {
     	let curDetail = this.hotDataList[key]
     	sessionStorage.setItem("curDetail", JSON.stringify(curDetail)) //本地缓存数据
 			this.$router.push({ name: 'Detail', query: { detailId: id }})
-    }
+    },
+    couponVal(val) {
+			if(val.indexOf('减') != -1) {
+				var couponVal = val.slice(val.indexOf("减")+1, val.length-1)
+			} else {
+				var couponVal = val.slice(0, val.indexOf("元"))
+			}
+			return couponVal
+		},
+		newPrice(oldPrice, val) {
+			if((val.indexOf('减')) != -1) {
+				var couponVal = val.slice(val.indexOf("减")+1, val.length-1)
+			} else {
+				var couponVal = val.slice(0, val.indexOf("元"))
+			}
+			let newPrice = (oldPrice - couponVal).toFixed(2)
+			return newPrice
+		}
 	}
 }
 </script>

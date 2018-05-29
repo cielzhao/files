@@ -4,11 +4,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state:{
-    show: true
+    priceOptionState: false
   },
   mutations:{
-    cateState(state){
-      state.show = false
+    priceOptionHide(state){
+      state.priceOptionState = false
+    },
+    priceOptionShow(state){
+      state.priceOptionState = false
     }
   }
 })

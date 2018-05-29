@@ -3,8 +3,8 @@
     <div class="cate-list clearfix">
       <span class="cate-lit-title">商品分类</span>
       <ul>
-        <li class="cate-item" v-for="(item, key) in cateData" :key="key" :data-item="key" @click="navStyle($event)">
-					<router-link :to="{path:'/coupon', query: {n:1, ca:key, sk:0}}">{{item}}</router-link>
+        <li class="cate-item" :class="[cataIndex==key ? 'active' : '']" v-for="(item, key) in cateData" :key="key" :data-item="key" @click="navStyle()">
+					<router-link :to="{path:'/coupon', query: {n:1, ca:key, st:0, sk:0, q:item}}">{{item}}</router-link>
 				</li>
       </ul>
 	 	</div>
@@ -14,13 +14,15 @@
 <script>
 import axios from 'axios'
 import api from '../api/api.js'
+import { mapMutations } from 'vuex'
 import CouponLive from './CouponLive'
 
 export default {
   name: 'Index',
   data () {
 		return {
-			cateData: null
+			cateData: null,
+			cataIndex: null
 		}
 	},
   components: {
@@ -38,25 +40,36 @@ export default {
     	let apiUrl = api.cateApi
       axios.get(apiUrl).then(function (response) {
       	_this.cateData = response.data
+      	_this.cataIndex = window.localStorage.getItem('cataIndex')
       }).catch((error) => {
         console.log(error)
       })
 		},
-		navStyle ($event) {
+		navStyle () {
 			let caQuery = this.$route.query.ca
-			if(caQuery != undefined) {
+			if(caQuery) {
 				var cateIndex = caQuery
 			} else {
 				var cateIndex = 0
 			}
-
 			let cateItem = document.querySelectorAll('.cate-item')
 			let cateLength = cateItem.length
 			for(let i = 0; i < cateLength; i++) {
 				cateItem[i].classList.remove("active")
 			}
 			cateItem[cateIndex].classList.add("active")
+
+			let keyWord = cateItem[cateIndex].children[0].innerHTML
+			console.log(keyWord)
+			window.localStorage.setItem('cataIndex', cateIndex)
+			window.localStorage.setItem('keyWord', keyWord)
+			this.$store.commit('priceOptionHide')
 		}
+  },
+  watch: {
+    '$route' (to, from) {
+      this.navStyle()
+    }
   }
 }
 </script>
@@ -187,7 +200,7 @@ export default {
 .tag-wrap {
     background-color: #f9f9f9;
     height: 38px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     line-height: 38px;
     position: relative;
     border: 1px solid #eee

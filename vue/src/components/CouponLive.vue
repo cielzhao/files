@@ -18,10 +18,8 @@
 	          </a>
 	          <div class="goods-padding">
 	            <div class="coupon-wrap clearfix">
-	              <span class="price" v-if="item.优惠券面额.indexOf('减')!=-1"><b><i>￥</i>{{(item.商品价格 - item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)).toFixed(2)}}</b>券后价</span>
-	              <span class="price" v-else="item.优惠券面额.indexOf('减')==-1"><b><i>￥</i>{{item.商品价格 - item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</b>券后价</span>
-	              <span class="coupon" v-if="item.优惠券面额.indexOf('减')!=-1">券<b><i>￥</i>{{item.优惠券面额.slice(item.优惠券面额.indexOf("减")+1, item.优惠券面额.length-1)}}</b></span>
-	              <span class="coupon" v-else="item.优惠券面额.indexOf('减')==-1">券<b><i>￥</i>{{item.优惠券面额.slice(0, item.优惠券面额.indexOf("元"))}}</b></span>
+	              <span class="price"><b><i>￥</i>{{newPrice(item.商品价格, item.优惠券面额)}}</b>券后价</span>
+	              <span class="coupon">券<b><i>￥</i>{{couponVal(item.优惠券面额)}}</b></span>
 	            </div>
 	            <div class="title">
 	              <a href="javascript:;">{{item.商品名称}}</a>
@@ -61,17 +59,28 @@ export default {
 	methods: {
 		fetchData () {
 			const _this = this
-			let caQuery = this.$route.query.ca
-			let skQuery = this.$route.query.sk
-    	console.log('caQuery=' + caQuery + '-----------skQuery=' + skQuery)
+			let caParam = this.$route.query.ca
+			let qParam = this.$route.query.q
+			let sParam = this.$options.methods.isParam(this.$route.query.s, 0)
+			let cParam = this.$options.methods.isParam(this.$route.query.c, 30)
+			let skParam = this.$options.methods.isParam(this.$route.query.sk, 0)
+			let sdParam = this.$options.methods.isParam(this.$route.query.sd, 0)
+			let psParam = this.$options.methods.isParam(this.$route.query.ps, 0)
+			let peParam = this.$options.methods.isParam(this.$route.query.pe, 1000)
+			console.log('caParam=' + caParam)
+			console.log('qParam=' + qParam)
+			console.log('sParam=' + sParam)
+			console.log('cParam=' + cParam)
+			console.log('skParam=' + skParam)
+			console.log('sdParam=' + sdParam)
+			console.log('psParam=' + psParam)
+			console.log('peParam=' + peParam)
 
-    	if(/^[\u3220-\uFA29]+$/.test(caQuery)) {
-				var apiUrl = api.searchApi + '?q=' + caQuery
-    	} else {
-    		var apiUrl = api.searchApi + '?t=' + caQuery + '&sk=' + skQuery + '&sd=0'
-    	}
+			var apiUrl = api.searchApi
+			var searchParams = {q: qParam, s: sParam, c: cParam, sk: skParam, sd: sdParam, ps: psParam, pe: peParam}
 
-      axios.get(apiUrl).then(function (response) {
+
+      axios.get(apiUrl, {params: searchParams}).then(function (response) {
       		_this.hotDataList = response.data.data
     			_this.hotLength = response.data.total
       }).catch((error) => {
@@ -84,9 +93,30 @@ export default {
     	sessionStorage.setItem('curDetail', JSON.stringify(curDetail)) //本地缓存数据
 			this.$router.push({ name: 'Detail', query: { detailId: id }})
     },
-		autoTo () {
-			let myHost = window.location.host
-
+		isParam (param, value) {
+			if(param) {
+				param = param;
+			}else {
+				param = value
+			}
+			return param;
+		},
+    couponVal(val) {
+			if(val.indexOf('减') != -1) {
+				var couponVal = val.slice(val.indexOf("减")+1, val.length-1)
+			} else {
+				var couponVal = val.slice(0, val.indexOf("元"))
+			}
+			return couponVal
+		},
+		newPrice(oldPrice, val) {
+			if((val.indexOf('减')) != -1) {
+				var couponVal = val.slice(val.indexOf("减")+1, val.length-1)
+			} else {
+				var couponVal = val.slice(0, val.indexOf("元"))
+			}
+			let newPrice = (oldPrice - couponVal).toFixed(2)
+			return newPrice
 		}
 	},
 	watch: {

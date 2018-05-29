@@ -2,9 +2,9 @@
 	<div class="tag-wrap main-container clearfix cat-wrap">
     <div class="fixed-wrap fl theme-a-hover-active-border-top-1">
 			<li class="tag-fixed" v-for="(item, key) in sortNav" :key="key" @click="navClick(item.index);navStyle()">
-				<router-link :data-index="item.index" :to="{path:'/coupon', query: {n:1, ca:caParam, st:item.index, sk:item.param, q:keyWord}}">{{item.text}}</router-link>
+				<router-link :data-index="item.index" :to="{path:'/search', query: {n:1, st:item.index,sk:item.param, q:keyWord}}">{{item.text}}</router-link>
 			</li>
-      <div class="sort-price-area fl" v-show="this.$store.state.priceOptionState">
+      <div class="sort-price-area fl" v-show="priceOptionState">
         <form class='sort-price' id="priceSort">
             <input class="min-price" id="minPrice" value="" placeholder="￥">
             <span>-</span>
@@ -14,16 +14,10 @@
         </form>
       </div>
     </div>
-    <!--<div class="goods-pages-page clearfix" style="">
-			<span class="pagebtn disabled pre-page"></span>
-      <span class="page-num"><b>1</b>/666</span>
-      <span class="pagebtn next-page"><a href="javascript:;"></a></span>
-    </div>-->
 	</div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 export default {
   name: 'Index',
   data () {
@@ -50,6 +44,7 @@ export default {
   				'index': 3
   			},
   		],
+  		priceOptionState: false,
   		caParam: '',
   		keyWord: ''
   	}
@@ -63,6 +58,7 @@ export default {
   		let skParam = this.$route.query.sk
   		let stParam = this.$route.query.st
   		let qParam = this.$route.query.q
+  		console.log(skParam)
   		let psParam = document.getElementById('minPrice').value
   		let peParam = document.getElementById('maxPrice').value
 			this.$router.push({name: 'coupon', query: {n:1, ca:caParam, sk:skParam, st:stParam, q:qParam, ps:psParam, pe:peParam}})
@@ -80,12 +76,10 @@ export default {
   		//控制价格排序输入框的显示隐藏
 			console.log(itemParam)
 			if(itemParam === 3) {
-//				this.$store.state.priceOptionState = true
-				this.$store.commit('priceOptionShow')
+				this.priceOptionState = true
 				document.getElementById('priceSort').setAttribute('data-sk', itemParam)
 			}else {
-//				this.$store.state.priceOptionState = false
-				this.$store.commit('priceOptionHide')
+				this.priceOptionState = false
 			}
   	},
   	navStyle () {

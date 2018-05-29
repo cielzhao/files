@@ -52,10 +52,11 @@ export default {
 	},
 	methods: {
 		searchKey() {
-			this.$store.commit('cateState')
+			let nQuery = this.$route.query.n
 			this.keyWord = document.getElementById('searchInput').value
+			window.localStorage.setItem('keyWord', this.keyWord)
 			if(this.keyWord != undefined && this.keyWord != '') {
-				this.$router.push({name: 'search', params: {n:1, c:this.keyWord}})
+				this.$router.push({path: 'search', query: {n:1, st:0, sk:0, q:this.keyWord}})
 			}
 		},
 		SetHome(obj,url){

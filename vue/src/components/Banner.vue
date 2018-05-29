@@ -1,5 +1,5 @@
 <template>
-	<div id="banner" v-if="curBannerState">
+	<div id="banner">
 		<div class="container">
 			<div class="row">
 				<BannerNav></BannerNav>
@@ -27,16 +27,6 @@ export default {
     'BannerNav': BannerNav,
     'BannerSwiper': BannerSwiper,
     'BannerShare': BannerShare,
-  },
-	computed:{
-    curBannerState() {
-    	if(!this.curState) {
-    		this.curState = window.localStorage.getItem('bannerStateValue');
-    	}
-
-    	console.log(this.curState)
-    	return this.curState
-    }
   }
 }
 </script>
