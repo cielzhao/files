@@ -1,72 +1,65 @@
 <template>
 	<div id="main">
 		<div class="container">
-			<div class="divider">亲爱的，欢迎每天来选购超值优惠商品哦~</div>
-			<div class="detail">
-				<div class="detail-img">
-					<a rel="nofollow" :href="curDetail.商品详情页链接地址" target="_blank" class="img" :data-id="curDetail.商品id">
-            <img class="lg-img" :src="curDetail.商品主图" alt="">
-            <!--<ul class="sm-img">
-            	<li v-for="(item, key) in curDetail.small_images.string" :key="key">
-            		<img :src="item" alt="" />
-            	</li>
-            </ul>-->
-          </a>
-				</div>
+			<div class="row">
+				<div class="divider">亲爱的，欢迎每天来选购超值优惠商品哦~</div>
+				<div class="detail">
+					<div class="detail-img col-md-4 col-sm-12">
+						<a rel="nofollow" :href="curDetail.商品详情页链接地址" target="_blank" class="img" :data-id="curDetail.商品id">
+	            <img class="lg-img" :src="curDetail.商品主图" alt="">
+	          </a>
+					</div>
 
-				<div class="detail-info">
-            <a class="title clearfix" :href="curDetail.优惠券短链接" target="_blank">
-              <span class="tmall" v-if="curDetail.user_type == 0"></span>
-              <span class="taobao" v-if="curDetail.user_type == 1"></span>
-              <span class="title">{{curDetail.店铺名称}}</span>
-						</a>
-						<!--<a href="javascript:;" class="pc-spjc"><i></i>商品反馈</a>-->
+					<div class="detail-info col-md-8 col-sm-12">
+	            <a class="title clearfix" :href="curDetail.优惠券短链接" target="_blank">
+	              <span class="tmall" v-if="curDetail.user_type == 0"></span>
+	              <span class="taobao" v-if="curDetail.user_type == 1"></span>
+	              <span class="title">{{curDetail.店铺名称}}</span>
+							</a>
+							<!--<a href="javascript:;" class="pc-spjc"><i></i>商品反馈</a>-->
 
-            <!--<div class="desc">
-              <span>推荐理由：新派高端棕系列，木制礼盒装，适合商务送礼（可定制商务logo，私聊店主哦），细节决定品质，送礼首选！</span>
-            </div>-->
+	            <!--<div class="desc">
+	              <span>推荐理由：新派高端棕系列，木制礼盒装，适合商务送礼（可定制商务logo，私聊店主哦），细节决定品质，送礼首选！</span>
+	            </div>-->
 
-            <div class="coupon-wrap clearfix">
-              <span class="now-price"><b class="theme-color-8">(独享)</b>券后价&nbsp;&nbsp;&nbsp;<b>¥<i>{{curPrice}}</i></b></span>
-              <span class="org-price">在售价&nbsp;&nbsp;¥<i>{{curDetail.商品价格}}</i></span>
-            </div>
+	            <div class="coupon-wrap clearfix">
+	              <span class="now-price"><b class="theme-color-8">(独享)</b>券后价&nbsp;&nbsp;&nbsp;<b>¥<i>{{curPrice}}</i></b></span>
+	              <span class="org-price">在售价&nbsp;&nbsp;¥<i>{{curDetail.商品价格}}</i></span>
+	            </div>
 
-            <div class="text-wrap">
-                <span class="text-wrap-span">优惠券总数<i>{{curDetail.优惠券总量}}</i>张</span>
-                <span>已有<i>{{curDetail.优惠券剩余量}}</i>人购买</span>
-            </div>
-            <div class="buy-time">
-                <span class="text-wrap-span">开始时间：<i>{{curDetail.优惠券开始时间}}</i></span>
-                <span>结束时间：<i>{{curDetail.优惠券结束时间}}</i></span>
-            </div>
+	            <div class="text-wrap">
+	                <span class="text-wrap-span">优惠券总数<i>{{curDetail.优惠券总量}}</i>张</span>
+	                <span>已有<i>{{curDetail.优惠券剩余量}}</i>人购买</span>
+	            </div>
+	            <div class="buy-time">
+	                <span class="text-wrap-span">开始时间：<i>{{curDetail.优惠券开始时间}}</i></span>
+	                <span>结束时间：<i>{{curDetail.优惠券结束时间}}</i></span>
+	            </div>
 
-            <!--商品领券状态s-->
-            <div class="ehy-normal clearfix">
-                <div class="buy-coupon">
-                    <span>优惠券</span>
-                    <span><b><i>￥</i>{{curReduce}}</b></span>
-                </div>
-                <a :href="curDetail.优惠券短链接" target="_blank">领券购买</a>
-            </div>
-            <!--商品领券状态e-->
+	            <!--商品领券状态s-->
+	            <div class="ehy-normal clearfix">
+	                <div class="buy-coupon">
+	                    <span>优惠券</span>
+	                    <span><b><i>￥</i>{{curReduce}}</b></span>
+	                </div>
+	                <a :href="curDetail.优惠券短链接" target="_blank">领券购买</a>
+	            </div>
+	            <!--商品领券状态e-->
 
-            <!--商品图标s-->
-            <div class="goods-tit-type">
-              <div class="goods-type">
-                <i class="tmall" title="天猫"></i>
-              </div>
-            </div>
-            <!--商品图标e-->
+	            <!--商品图标s-->
+	            <div class="goods-tit-type">
+	              <div class="goods-type">
+	                <i class="tmall" title="天猫"></i>
+	              </div>
+	            </div>
+	            <!--商品图标e-->
 
-            <!--分享链接s-->
-            <div class="text2">
-              <span>如果您喜欢此宝贝，记得分享给您的朋友，一起享优惠：</span>
-            </div>
-            <!--分享链接e-->
-        </div>
-
-				<div class="detail-right">
-
+	            <!--分享链接s-->
+	            <!--<div class="text2">
+	              <span>如果您喜欢此宝贝，记得分享给您的朋友，一起享优惠：</span>
+	            </div>-->
+	            <!--分享链接e-->
+	        </div>
 				</div>
 			</div>
 		</div>
@@ -115,8 +108,8 @@ export default {
 .detail {
     position: relative;
     background-color: #fff;
-    width: 1160px;
-    padding: 20px
+    padding: 20px;
+    width: 100%;
 }
 
 .detail .nav-wrap {
@@ -152,7 +145,8 @@ export default {
 }
 
 .detail a.img {
-    float: left
+    float: left;
+    padding: 20px;
 }
 
 .detail a.img img {
@@ -191,14 +185,14 @@ export default {
 
 .detail .detail-info a.title span.title {
     float: left;
-    width: 500px;
+    width: auto;
     height: 30px;
     line-height: 30px;
     overflow: hidden;
     display: block;
     font-size: 18px;
     color: #424242;
-    margin-left: 4px
+    margin-left: 0;
 }
 
 .detail .detail-info .desc {
@@ -429,7 +423,7 @@ export default {
     font-size: 12px
 }
 
-.detail .detail-info .text2 {
+/*.detail .detail-info .text2 {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -451,7 +445,7 @@ export default {
     vertical-align: middle;
     width: 100px;
     position: static
-}
+}*/
 
 .detail .detail-info .bdshare {
     font-size: 12px;
@@ -503,5 +497,21 @@ export default {
   margin: 0 5px;
   color: #ed145b;
   font-family: Arial;
+}
+@media only screen and (max-width: 575px) {
+	.detail {
+		padding: 0;
+	}
+	.detail .detail-info {
+    width: 100%;
+    margin-left: 0;
+    padding: 20px;
+	}
+}
+@media only screen and (min-width: 576px) and (max-width: 1024px) {
+	.detail .detail-info {
+    width: 100%;
+    margin-left: 0;
+	}
 }
 </style>

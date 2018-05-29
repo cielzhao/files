@@ -50,7 +50,6 @@ export default {
 		return {
 			hotDataList: null,
 			hotLength: 0,
-			pageId: 0
 		}
 	},
   created() {
@@ -67,14 +66,14 @@ export default {
 			let sdParam = this.$options.methods.isParam(this.$route.query.sd, 0)
 			let psParam = this.$options.methods.isParam(this.$route.query.ps, 0)
 			let peParam = this.$options.methods.isParam(this.$route.query.pe, 1000)
-			console.log('caParam=' + caParam)
-			console.log('qParam=' + qParam)
-			console.log('sParam=' + sParam)
-			console.log('cParam=' + cParam)
-			console.log('skParam=' + skParam)
-			console.log('sdParam=' + sdParam)
-			console.log('psParam=' + psParam)
-			console.log('peParam=' + peParam)
+//			console.log('caParam=' + caParam)
+//			console.log('qParam=' + qParam)
+//			console.log('sParam=' + sParam)
+//			console.log('cParam=' + cParam)
+//			console.log('skParam=' + skParam)
+//			console.log('sdParam=' + sdParam)
+//			console.log('psParam=' + psParam)
+//			console.log('peParam=' + peParam)
 
 			var apiUrl = api.searchApi
 			var searchParams = {q: qParam, s: sParam, c: cParam, sk: skParam, sd: sdParam, ps: psParam, pe: peParam}
@@ -91,7 +90,7 @@ export default {
     	let id = this.hotDataList[key].商品id
     	let curDetail = this.hotDataList[key]
     	sessionStorage.setItem('curDetail', JSON.stringify(curDetail)) //本地缓存数据
-			this.$router.push({ name: 'Detail', query: { detailId: id }})
+			this.$router.push({ path: 'Detail', query: { detailId: id }})
     },
 		isParam (param, value) {
 			if(param) {

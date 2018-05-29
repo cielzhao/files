@@ -114,8 +114,7 @@ export default {
 }
 .header-con-logo a {
     line-height: 80px;
-    font-size: 34px;
-    padding-left: 20px;
+    font-size: 30px;
     color: #ff6eb4;
 }
 

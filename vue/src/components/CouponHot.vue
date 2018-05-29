@@ -77,7 +77,7 @@ export default {
     	let id = this.hotDataList[key].商品id
     	let curDetail = this.hotDataList[key]
     	sessionStorage.setItem("curDetail", JSON.stringify(curDetail)) //本地缓存数据
-			this.$router.push({ name: 'Detail', query: { detailId: id }})
+			this.$router.push({ path: 'Detail', query: { detailId: id }})
     },
     couponVal(val) {
 			if(val.indexOf('减') != -1) {

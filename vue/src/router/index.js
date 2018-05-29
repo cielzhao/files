@@ -42,51 +42,51 @@ export default new Router({
     },
     {
     	name: 'Detail',
-      path: '/Detail/:pageId',
+      path: '/Detail',
       component: Detail,
-      children: [
-        {
-        	redirect: {
-			      name: 'Header'
-			    },
-			    path: 'Header',
-			    component: Header
-        },
-        {
-        	redirect: {
-			      name: 'Nav'
-			    },
-			    path: 'Nav',
-			    component: Nav
-        },
-        {
-        	path: 'DetailMain',
-        	component: DetailMain,
-        	children: [
-		        {
-		        	redirect: {
-					      name: 'CouponHot'
-					    },
-		        	path: 'CouponHot',
-		        	component: CouponHot
-		        },
-		        {
-		        	redirect: {
-					      name: 'CouponLive'
-					    },
-		        	path: 'CouponLive',
-		        	component: CouponLive
-		        },
-		      ]
-        },
-        {
-        	redirect: {
-			      name: 'Footer'
-			    },
-			    path: 'Footer',
-			    component: Footer
-        },
-      ]
+//    children: [
+//      {
+//      	redirect: {
+//			      name: 'Header'
+//			    },
+//			    path: 'Header',
+//			    component: Header
+//      },
+//      {
+//      	redirect: {
+//			      name: 'Nav'
+//			    },
+//			    path: 'Nav',
+//			    component: Nav
+//      },
+//      {
+//      	path: 'DetailMain',
+//      	component: DetailMain,
+//      	children: [
+//		        {
+//		        	redirect: {
+//					      name: 'CouponHot'
+//					    },
+//		        	path: 'CouponHot',
+//		        	component: CouponHot
+//		        },
+//		        {
+//		        	redirect: {
+//					      name: 'CouponLive'
+//					    },
+//		        	path: 'CouponLive',
+//		        	component: CouponLive
+//		        },
+//		      ]
+//      },
+//      {
+//      	redirect: {
+//			      name: 'Footer'
+//			    },
+//			    path: 'Footer',
+//			    component: Footer
+//      },
+//    ]
     }
   ]
 })
