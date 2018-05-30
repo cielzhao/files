@@ -59,6 +59,10 @@ export default {
     box-sizing: border-box;
     text-align: center;
 }
+#banner .banner-nav.col-md-2 {
+	padding-left: 0;
+	padding-right: 0;
+}
 #banner .banner-nav li:hover {
 	background-color:#efdfe4;
 }

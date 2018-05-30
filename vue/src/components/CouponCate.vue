@@ -164,7 +164,7 @@ export default {
 }
 
 .cate-wrap .sale-type ul .active a i {
-    background: url(../assets/images/index/cms_pc_img.png?v=20184103648381) -99px -80px no-repeat #ff6255
+    background: url(../assets/images/index/cms_pc_img.png) -99px -80px no-repeat #ff6255
 }
 .cate-wrap .cate-list ul li.cate-item.active a,
 .cate-wrap .cate-list ul li .router-link-exact-active.router-link-active {

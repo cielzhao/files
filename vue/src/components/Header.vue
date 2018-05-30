@@ -97,6 +97,10 @@ export default {
 	color: #666;
 	letter-spacing: 1px;
 }
+
+ul.header-top-right {
+	margin-bottom: 0;
+}
 .header-top-right li {
 	display: inline-block;
 	margin: 4px 8px;
