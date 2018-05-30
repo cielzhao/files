@@ -1,10 +1,10 @@
 <template>
 	<div class="tag-wrap main-container clearfix cat-wrap">
     <div class="fixed-wrap fl theme-a-hover-active-border-top-1">
-			<li class="tag-fixed" v-for="(item, key) in sortNav" :key="key" @click="navClick(item.index);navStyle()">
-				<router-link :data-index="item.index" :to="{path:'/search', query: {n:1, st:item.index,sk:item.param, q:keyWord}}">{{item.text}}</router-link>
+			<li class="tag-fixed" v-for="(item, key) in sortNav" :key="key" @click="navStyle()">
+				<router-link :data-index="item.index" :to="{path:'/search', query: {n:1, f:'search', q:keyWord, st:item.index, sk:item.param}}">{{item.text}}</router-link>
 			</li>
-      <div class="sort-price-area fl" v-show="priceOptionState">
+      <div class="sort-price-area fl" v-show="priceOptionState1">
         <form class='sort-price' id="priceSort">
             <input class="min-price" id="minPrice" value="" placeholder="￥">
             <span>-</span>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mutations } from 'vuex'
 export default {
   name: 'Index',
   data () {
@@ -49,56 +50,74 @@ export default {
   		keyWord: ''
   	}
   },
+  created() {
+  	this.getData()
+  },
   mounted () {
   	this.navStyle()
   },
+  computed: {
+  	priceOptionState1 () {
+      return this.$store.state.priceOptionState1
+    }
+  },
   methods:{
+  	getData() {
+  		this.keyWord = window.localStorage.getItem('keyWord')
+  	},
+
+  	navStyle () {
+  		console.log(this.keyWord)
+			this.tParam = this.$route.query.t
+			if(!this.tParam) {
+				this.tParam = 0
+			}
+
+			let stParam = this.$route.query.st
+			if(!this.stParam) {
+				this.stParam = 0
+			}
+
+			//排序导航样式
+			let sortItem = document.querySelectorAll('.tag-fixed')
+			let sortLength = sortItem.length
+			for(let i = 0; i < sortLength; i++) {
+				sortItem[i].classList.remove("active")
+			}
+			sortItem[stParam].classList.add("active")
+
+			//点击价格出现筛选区间
+			if(stParam == 3) {
+				this.$store.commit('priceOptionShow1')
+				document.getElementById('priceSort').setAttribute('data-sk', stParam)
+			} else {
+				this.$store.commit('priceOptionHide1')
+			}
+		},
+
   	priceSortConfirm() {
-  		let caParam = this.$route.query.ca
+  		let qParam = this.$route.query.q
   		let skParam = this.$route.query.sk
   		let stParam = this.$route.query.st
-  		let qParam = this.$route.query.q
-  		console.log(skParam)
   		let psParam = document.getElementById('minPrice').value
   		let peParam = document.getElementById('maxPrice').value
-			this.$router.push({name: 'coupon', query: {n:1, ca:caParam, sk:skParam, st:stParam, q:qParam, ps:psParam, pe:peParam}})
+  		if(!psParam) {
+  			psParam = 0
+  		}
+  		if(!peParam) {
+  			peParam = 1000
+  		}
+			this.$router.push({path: '/search', query: {n:1, f:'search', q:qParam, sk:skParam, st:stParam, ps:psParam, pe:peParam}})
   	},
+
   	priceSortClear() {
-  		let caParam = this.$route.query.ca
+  		let qParam = this.$route.query.q
   		let skParam = this.$route.query.sk
   		let stParam = this.$route.query.st
-  		let qParam = this.$route.query.q
   		document.getElementById('minPrice').value = ''
   		document.getElementById('maxPrice').value = ''
-  		this.$router.push({name: 'coupon', query: {n:1, ca:caParam, sk:skParam, st:stParam, q:qParam, ps:0, pe:100}})
-  	},
-  	navClick(itemParam) {
-  		//控制价格排序输入框的显示隐藏
-			console.log(itemParam)
-			if(itemParam === 3) {
-				this.priceOptionState = true
-				document.getElementById('priceSort').setAttribute('data-sk', itemParam)
-			}else {
-				this.priceOptionState = false
-			}
-  	},
-  	navStyle () {
-			this.caParam = this.$route.query.ca
-			if(!this.caParam) {
-				this.caParam = 0
-			}
-			let stParam = this.$route.query.st
-			var cateIndex = stParam
-			let cateItem = document.querySelectorAll('.tag-fixed')
-			let cateLength = cateItem.length
-			for(let i = 0; i < cateLength; i++) {
-				cateItem[i].classList.remove("active")
-			}
-			cateItem[cateIndex].classList.add("active")
-
-			window.localStorage.setItem('cataIndex', this.caParam)
-			this.keyWord = window.localStorage.getItem('keyWord')
-		}
+  		this.$router.push({path: '/search', query: {n:1, f:'search', q:qParam, sk:skParam, st:stParam, ps:0, pe:100}})
+  	}
 	},
   watch: {
     '$route' (to, from) {

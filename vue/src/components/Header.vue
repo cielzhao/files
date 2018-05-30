@@ -56,7 +56,7 @@ export default {
 			this.keyWord = document.getElementById('searchInput').value
 			window.localStorage.setItem('keyWord', this.keyWord)
 			if(this.keyWord != undefined && this.keyWord != '') {
-				this.$router.push({path: 'search', query: {n:1, st:0, sk:0, q:this.keyWord}})
+				this.$router.push({path: 'search', query: {n:1, f:'search', q:this.keyWord, st:0, sk:0}})
 			}
 		},
 		SetHome(obj,url){

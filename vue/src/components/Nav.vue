@@ -4,7 +4,7 @@
 			<div class="row">
 				<li class="nav-item" :class="{'active': item.active}" v-for="(item, key) in navData" :key="key">
 					<router-link v-if="item.pageId == 0" :to="{path: '/index', query: {n:item.pageId}}">{{item.text}}</router-link>
-					<router-link v-if="item.pageId != 0" :to="{path: '/coupon', query: {n:1, ca:0, st:0, q:keyWord}}">{{item.text}}</router-link>
+					<router-link v-if="item.pageId != 0" :to="{path: '/coupon', query: {n:1, t:0, st:0, sk:0}}">{{item.text}}</router-link>
 				</li>
 			</div>
 		</div>
@@ -47,6 +47,7 @@ export default {
     	let apiUrl = api.cateApi
       axios.get(apiUrl).then(function (response) {
       	_this.keyWord = response.data[0]
+      	window.localStorage.setItem('tParam', 0)
       }).catch((error) => {
         console.log(error)
       })

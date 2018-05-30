@@ -5,9 +5,9 @@
 				<div class="hot-head-left fl">
 	        <h1>领券优惠<span class="tatal" v-if="hotLength">{{hotLength}}</span></h1>
 	      </div>
-	      <div class="hot-head-right fr">
+	      <!--<div class="hot-head-right fr">
 	        <span style="color: #505050;">更多优惠 »</span>
-	      </div>
+	      </div>-->
 			</div>
 			<div class="goods-list">
 				<ul class="clearfix">
@@ -58,7 +58,8 @@ export default {
 	methods: {
 		fetchData () {
 			const _this = this
-			let caParam = this.$route.query.ca
+			let fParam = this.$route.query.f
+			let tParam = this.$route.query.t
 			let qParam = this.$route.query.q
 			let sParam = this.$options.methods.isParam(this.$route.query.s, 0)
 			let cParam = this.$options.methods.isParam(this.$route.query.c, 30)
@@ -66,7 +67,8 @@ export default {
 			let sdParam = this.$options.methods.isParam(this.$route.query.sd, 0)
 			let psParam = this.$options.methods.isParam(this.$route.query.ps, 0)
 			let peParam = this.$options.methods.isParam(this.$route.query.pe, 1000)
-//			console.log('caParam=' + caParam)
+
+			console.log('fParam=' + fParam)
 //			console.log('qParam=' + qParam)
 //			console.log('sParam=' + sParam)
 //			console.log('cParam=' + cParam)
@@ -76,7 +78,12 @@ export default {
 //			console.log('peParam=' + peParam)
 
 			var apiUrl = api.searchApi
-			var searchParams = {q: qParam, s: sParam, c: cParam, sk: skParam, sd: sdParam, ps: psParam, pe: peParam}
+			if(fParam === 'search') {
+				var searchParams = {q: qParam, s: sParam, c: cParam, sk: skParam, sd: sdParam, ps: psParam, pe: peParam}
+			} else {
+				var searchParams = {t: tParam, s: sParam, c: cParam, sk: skParam, sd: sdParam, ps: psParam, pe: peParam}
+			}
+
 
 
       axios.get(apiUrl, {params: searchParams}).then(function (response) {
