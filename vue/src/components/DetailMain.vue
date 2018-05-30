@@ -47,11 +47,11 @@
 	            <!--商品领券状态e-->
 
 	            <!--商品图标s-->
-	            <div class="goods-tit-type">
+	            <!--<div class="goods-tit-type">
 	              <div class="goods-type">
 	                <i class="tmall" title="天猫"></i>
 	              </div>
-	            </div>
+	            </div>-->
 	            <!--商品图标e-->
 
 	            <!--分享链接s-->
