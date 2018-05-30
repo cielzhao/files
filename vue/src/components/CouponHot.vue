@@ -7,12 +7,12 @@
         <span>实时更新</span>
         <span>/</span>
         <span>独享优惠券</span>
-      </div>
-      <div class="hot-head-right fr">
+     </div>
+      <!--<div class="hot-head-right fr">
         <span>/</span>
         <span>将优选、性价比做到极致</span>
         <span>/</span>
-      </div>
+      </div>-->
 		</div>
 		<div class="hot-product">
 			<div class="product-list col-md-6 col-sm-12" v-for="(item, key) in hotDataList" :key="key">
@@ -65,7 +65,6 @@ export default {
 			const _this = this
     	let apiUrl = api.searchApi + "?t=0"
       axios.get(apiUrl).then(function (response) {
-      	console.log(response.data)
       	_this.hotData = response.data
       	_this.hotDataList = _this.hotData.data
       	_this.requestId = _this.hotDataList.商品id
