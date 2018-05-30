@@ -87,11 +87,14 @@ export default {
 </script>
 
 <style>
-.swiper-slide {
+#swiperWrap {
+	height: 300px;
+}
+#swiperWrap .swiper-slide {
 	background-size: cover;
 	height: 300px;
 }
-.swiper-to-detail {
+#swiperWrap .swiper-to-detail {
 	width: 100%;
 	height: 100%;
 }
